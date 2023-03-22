@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import com.google.firebase.auth.FirebaseAuth
 
 class ChoicesActivity : AppCompatActivity() {
 

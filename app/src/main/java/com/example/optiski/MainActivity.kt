@@ -59,8 +59,7 @@ class MainActivity : AppCompatActivity() {
             // triggered when there is
             // scroll state will be changed
             override fun onPageScrollStateChanged(state: Int) {
-                super.onPageScrollStateChanged(state)
-            }
+                super.onPageScrollStateChanged(state)            }
         })*/
         val buttonSignIn = findViewById<ImageButton>(R.id.signInButton)
         val buttonSignInGoogle = findViewById<ImageButton>(R.id.signInGoogleButton)
