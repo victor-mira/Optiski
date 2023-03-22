@@ -1,58 +1,86 @@
 package com.example.optiski
 
+
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
-import com.example.optiski.databinding.ActivityMainBinding
+import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
-
+    //private lateinit var viewPager2: ViewPager2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
+        /*viewPager2 = findViewById<ViewPager2>(R.id.pager)
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        // Object of ViewPager2Adapter
+        // this will passes the
+        // context to the constructor
+        // of ViewPager2Adapter
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        // Object of ViewPager2Adapter
+        // this will passes the
+        // context to the constructor
+        // of ViewPager2Adapter
+        val viewPager2Adapter = ViewPager2Adapter(this)
+
+        // adding the adapter to viewPager2
+        // to show the views in recyclerview
+
+        // adding the adapter to viewPager2
+        // to show the views in recyclerview
+        viewPager2.setAdapter(viewPager2Adapter)
+
+        // To get swipe event of viewpager2
+
+        // To get swipe event of viewpager2
+        viewPager2.registerOnPageChangeCallback(object : OnPageChangeCallback() {
+            // This method is triggered when there is any scrolling activity for the current page
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+            }
+
+            // triggered when you select a new page
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+            }
+
+            // triggered when there is
+            // scroll state will be changed
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+            }
+        })*/
+        val buttonSignIn = findViewById<ImageButton>(R.id.signInButton)
+        val buttonSignInGoogle = findViewById<ImageButton>(R.id.signInGoogleButton)
+        val buttonSignUp = findViewById<ImageButton>(R.id.signUpButton)
+
+
+        buttonSignIn.setOnClickListener {
+            val intent = Intent(this, ConnexionActivity::class.java)
+            startActivity(intent)
         }
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
+        buttonSignInGoogle.setOnClickListener {
+            val intent = Intent(this, ChoicesActivity::class.java)
+            startActivity(intent)
         }
-    }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+        buttonSignUp.setOnClickListener {
+            val intent = Intent(this, InscriptionActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }

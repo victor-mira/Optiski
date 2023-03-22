@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/miniPiste"
+        android:layout_width="357dp"
+        android:layout_height="251dp"
+        android:contentDescription="@string/plan_pistes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/minipiste" />
+
+    <ScrollView
+        android:id="@+id/scrollResults"
+        android:layout_width="323dp"
+        android:layout_height="477dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/miniPiste">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageTelesiege"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/tk_roches_noires"
+                app:srcCompat="@drawable/roches_noires" />
+
+            <TextView
+                android:id="@+id/textTelesiege"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/tk_roches_noires"
+                android:textSize="25sp" />
+
+            <ImageView
+                android:id="@+id/imagePiste1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/belette"
+                app:srcCompat="@drawable/piste_bleue" />
+
+            <TextView
+                android:id="@+id/textPiste1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/belette"
+                android:textSize="25sp" />
+
+            <ImageView
+                android:id="@+id/imagePiste2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/elan"
+                app:srcCompat="@drawable/piste_noire" />
+
+            <TextView
+                android:id="@+id/textPiste2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/elan"
+                android:textSize="25sp" />
+
+            <ImageView
+                android:id="@+id/imagePiste3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/lauzes"
+                app:srcCompat="@drawable/piste_rouge" />
+
+            <TextView
+                android:id="@+id/textPiste3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/lauzes"
+                android:textSize="25sp" />
+
+            <ImageView
+                android:id="@+id/imagePiste4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/marmottes"
+                app:srcCompat="@drawable/piste_verte" />
+
+            <TextView
+                android:id="@+id/textPiste4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/marmottes"
+                android:textSize="25sp" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

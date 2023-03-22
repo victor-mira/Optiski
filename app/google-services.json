@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "812043946081",
+    "project_id": "optiski",
+    "storage_bucket": "optiski.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:812043946081:android:4bb3f008f82c963c2b4220",
+        "android_client_info": {
+          "package_name": "com.example.optiski"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "812043946081-hfg3pu9l1ir3k2bh3vv2f0glel058tqg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.optiski",
+            "certificate_hash": "5be5af7affce4b62f687410b63a855baafaf78eb"
+          }
+        },
+        {
+          "client_id": "812043946081-1u0sr3okkgfmi6v4s0019iqifjg0j8h4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGqYz9nEfNTYUXm3K-Zn7DboYxWZN_GiU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "812043946081-1u0sr3okkgfmi6v4s0019iqifjg0j8h4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

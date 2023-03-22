@@ -1,12 +1,47 @@
 <resources>
-    <string name="app_name">OPTISKI</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="app_name">OptiSki</string>
+    <string name="optiski">OptiSki</string>
+    <string name="logo_d_optiski">logo d\'OptiSki</string>
+    <string name="connexion">connexion</string>
+    <string name="connexion_google">connexion avec google</string>
+    <string name="inscription">inscription</string>
+    <string name="connexion_google_text">Connexion avec Google</string>
+    <string name="connexion_text">connexion</string>
+    <string name="inscription_text">Inscription</string>
+    <string name="adresse_mail">adresse Mail :</string>
+    <string name="mail_example">mail@example.com</string>
+    <string name="mot_de_passe">Mot de passe :</string>
+    <string name="password_example">********************</string>
+    <string name="ou">Ou</string>
+    <string name="next">next</string>
+    <string name="image_filler">image filler</string>
+    <string name="nom">Nom</string>
+    <string name="beginner">Débutant</string>
+    <string name="intermediate">Intermédiaire</string>
+    <string name="advanced">Avancé</string>
+    <string name="selected_item">Selected item</string>
+    <string name="choix_station">Choix de la station</string>
+    <string name="gps_pin">GPS pin</string>
+    <string name="clock">clock</string>
+    <string name="hour">3:00</string>
+    <string name="skier_image">image d\'un skieur</string>
+    <string name="start_button">bouton start</string>
+    <string name="plan_pistes">plan des pistes réduit</string>
+    <string name="tk_roches_noires">télésiège Roches Noires</string>
+    <string name="belette">Piste Belette (bleue)</string>
+    <string name="elan">Piste Elan (rouge)</string>
+    <string name="lauzes">Piste Les Lauzes (bleue)</string>
+    <string name="marmottes">Piste Marmottes (rouge)</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string-array name="Stations">
+        <item>La Rosière</item>
+        <item>Les Arcs</item>
+        <item>Courchevel</item>
+        <item>Méribel</item>
+        <item>Le Valinouet</item>
+        <item>Bromont</item>
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
