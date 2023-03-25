@@ -1,0 +1,72 @@
+[
+  {
+    "number": "1",
+    "difficulty": 1,
+    "time": [45,15,5]
+  },
+  {
+    "number": "1A",
+    "difficulty": 3,
+    "time": [300,5,2]
+  },
+  {
+    "number": "2",
+    "difficulty": 3,
+    "time": [300,10,4]
+  },
+  {
+    "number": "2A",
+    "difficulty": 3,
+    "time": [300,10,5]
+  },
+  {
+    "number": "2B",
+    "difficulty": 3,
+    "time": [300,10,5]
+  },
+  {
+    "number": "3",
+    "difficulty": 3,
+    "time": [300,10,5]
+  },
+  {
+    "number": "3A",
+    "difficulty": 3,
+    "time": [300,10,5]
+  },
+  {
+    "number": "4",
+    "difficulty": 3,
+    "time": [300,10,5]
+  },
+  {
+    "number": "5",
+    "difficulty": 3,
+    "time": [300,10,5]
+  },
+  {
+    "number": "6",
+    "difficulty": 1,
+    "time": [30,10,5]
+  },
+  {
+    "number": "7",
+    "difficulty": 2,
+    "time": [45,10,5]
+  },
+  {
+    "number": "8",
+    "difficulty": 3,
+    "time": [300,10,5]
+  },
+  {
+    "number": "9",
+    "difficulty": 3,
+    "time": [300,10,5]
+  },
+  {
+    "number": "10",
+    "difficulty": 3,
+    "time": [300,10,5]
+  }
+]
