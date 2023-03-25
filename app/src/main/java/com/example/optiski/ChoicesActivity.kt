@@ -1,5 +1,6 @@
 package com.example.optiski
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -61,8 +62,28 @@ class ChoicesActivity : AppCompatActivity() {
                 dialog, which -> dialog.cancel()
             }
 
-            val AlertDialog = builder.create()
-            AlertDialog.show()
+            val alertDialog = builder.create()
+            alertDialog.show()
         }
+
+        //Time picker
+        val hourpicker = findViewById<NumberPicker>(R.id.hourpicker)
+        val minutepicker = findViewById<NumberPicker>(R.id.minutepicker)
+        hourpicker.minValue = 0
+        hourpicker.maxValue = 4
+        minutepicker.displayedValues = arrayOf("0","15","30","45")
+        minutepicker.minValue = 0
+        minutepicker.maxValue = 3
+
+        val builderAlert = AlertDialog.Builder(this)
+        builderAlert.setTitle(R.string.position_alert_title)
+        builderAlert.setMessage(R.string.position_alert_msg)
+        builderAlert.setPositiveButton(R.string.ok) {dialog, which ->
+            Toast.makeText(applicationContext, R.string.position_accept, Toast.LENGTH_SHORT).show()
+        }
+        builderAlert.setNegativeButton(R.string.reject) {dialog, which ->
+            Toast.makeText(applicationContext, R.string.position_denied, Toast.LENGTH_SHORT).show()
+        }
+        builderAlert.show()
     }
 }

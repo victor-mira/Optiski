@@ -33,6 +33,14 @@
     <string name="lauzes">Piste Les Lauzes (bleue)</string>
     <string name="marmottes">Piste Marmottes (rouge)</string>
 
+    <!-- Position alert -->
+    <string name="position_alert_title">Localisation</string>
+    <string name="position_alert_msg">Voulez-vous autoriser la localisation ?</string>
+    <string name="ok">Ok</string>
+    <string name="reject">Refuser</string>
+    <string name="position_accept">Localisation activée</string>
+    <string name="position_denied">Nous n\'utiliserons pas votre localisation</string>
+
     <string-array name="Stations">
         <item>La Rosière</item>
         <item>Les Arcs</item>
