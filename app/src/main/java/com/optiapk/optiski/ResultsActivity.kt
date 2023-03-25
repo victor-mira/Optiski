@@ -10,7 +10,7 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.example.optiski.models.Piste
+import com.optiapk.optiski.models.Piste
 import com.google.gson.reflect.TypeToken
 import java.io.IOException
 import kotlin.math.abs

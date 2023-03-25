@@ -41,6 +41,26 @@ class ChoicesActivity : AppCompatActivity() {
         val spinner = findViewById<Spinner>(R.id.choix_station)
         val buttonHelp = findViewById<ImageButton>(R.id.helpButton)
 
+        //Time picker
+        val hourpicker = findViewById<NumberPicker>(R.id.hourpicker)
+        val minutepicker = findViewById<NumberPicker>(R.id.minutepicker)
+        hourpicker.minValue = 0
+        hourpicker.maxValue = 4
+        minutepicker.displayedValues = arrayOf("0","15","30","45")
+        minutepicker.minValue = 0
+        minutepicker.maxValue = 3
+
+        val builderAlert = AlertDialog.Builder(this)
+        builderAlert.setTitle(R.string.position_alert_title)
+        builderAlert.setMessage(R.string.position_alert_msg)
+        builderAlert.setPositiveButton(R.string.ok) {dialog, which ->
+            Toast.makeText(applicationContext, R.string.position_accept, Toast.LENGTH_SHORT).show()
+        }
+        builderAlert.setNegativeButton(R.string.reject) {dialog, which ->
+            Toast.makeText(applicationContext, R.string.position_denied, Toast.LENGTH_SHORT).show()
+        }
+        builderAlert.show()
+
         if (spinner != null) {
             val adapter = ArrayAdapter(
                 this,
@@ -95,6 +115,7 @@ class ChoicesActivity : AppCompatActivity() {
         }
     }
 
+
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
 
@@ -105,24 +126,6 @@ class ChoicesActivity : AppCompatActivity() {
             // No user is signed in
         }
 
-        //Time picker
-        val hourpicker = findViewById<NumberPicker>(R.id.hourpicker)
-        val minutepicker = findViewById<NumberPicker>(R.id.minutepicker)
-        hourpicker.minValue = 0
-        hourpicker.maxValue = 4
-        minutepicker.displayedValues = arrayOf("0","15","30","45")
-        minutepicker.minValue = 0
-        minutepicker.maxValue = 3
 
-        val builderAlert = AlertDialog.Builder(this)
-        builderAlert.setTitle(R.string.position_alert_title)
-        builderAlert.setMessage(R.string.position_alert_msg)
-        builderAlert.setPositiveButton(R.string.ok) {dialog, which ->
-            Toast.makeText(applicationContext, R.string.position_accept, Toast.LENGTH_SHORT).show()
-        }
-        builderAlert.setNegativeButton(R.string.reject) {dialog, which ->
-            Toast.makeText(applicationContext, R.string.position_denied, Toast.LENGTH_SHORT).show()
-        }
-        builderAlert.show()
     }
 }
