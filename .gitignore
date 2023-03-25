@@ -26,3 +26,5 @@ captures/
 *.iml
 *.iws
 *.ipr
+# local properties
+local.properties
