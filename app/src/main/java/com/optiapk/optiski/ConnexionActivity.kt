@@ -1,4 +1,4 @@
-package com.example.optiski
+package com.optiapk.optiski
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

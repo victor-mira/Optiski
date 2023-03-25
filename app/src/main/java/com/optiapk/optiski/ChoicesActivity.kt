@@ -1,4 +1,4 @@
-package com.example.optiski
+package com.optiapk.optiski
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,15 +6,36 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class ChoicesActivity : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
+    private lateinit var googleSignInClient: GoogleSignInClient
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choices)
         supportActionBar?.hide()
 
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
+        // [END config_signin]
+
+        auth = FirebaseAuth.getInstance()
+
+
         val buttonResult = findViewById<ImageButton>(R.id.imageButton)
+        val signoutButton = findViewById<ImageButton>(R.id.signOutGoogleButton)
         val stations = resources.getStringArray(R.array.Stations)
         val spinner = findViewById<Spinner>(R.id.choix_station)
         val buttonHelp = findViewById<ImageButton>(R.id.helpButton)
@@ -64,5 +85,24 @@ class ChoicesActivity : AppCompatActivity() {
             val AlertDialog = builder.create()
             AlertDialog.show()
         }
+
+        signoutButton.setOnClickListener{
+            auth = FirebaseAuth.getInstance()
+            auth.signOut()
+            googleSignInClient.signOut().addOnCompleteListener(this,
+                OnCompleteListener<Void?> { updateUI(null) })
+        }
+    }
+
+    private fun updateUI(user: FirebaseUser?) {
+        if (user != null) {
+
+            // User is signed in
+        } else {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            // No user is signed in
+        }
+
     }
 }

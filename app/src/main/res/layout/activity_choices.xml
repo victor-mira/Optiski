@@ -105,4 +105,15 @@
         app:layout_constraintTop_toBottomOf="@+id/choix_station"
         app:srcCompat="@drawable/question" />
 
+    <ImageButton
+        android:id="@+id/signOutGoogleButton"
+        android:layout_width="65dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logout" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

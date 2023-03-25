@@ -32,6 +32,7 @@
     <string name="elan">Piste Elan (rouge)</string>
     <string name="lauzes">Piste Les Lauzes (bleue)</string>
     <string name="marmottes">Piste Marmottes (rouge)</string>
+    <string name="web_client_id">295480818850-10fd218ogp694hqv11nqm9ttlkjpn5ll.apps.googleusercontent.comw</string>
 
     <string-array name="Stations">
         <item>La Rosière</item>
