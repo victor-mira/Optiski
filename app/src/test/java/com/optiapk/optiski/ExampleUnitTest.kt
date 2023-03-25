@@ -1,4 +1,4 @@
-package com.example.optiski
+package com.optiapk.optiski
 
 import org.junit.Test
 
