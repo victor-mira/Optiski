@@ -45,6 +45,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3"
         app:srcCompat="@drawable/connexion_google" />
 
+
     <ImageButton
         android:id="@+id/signUpButton"
         android:layout_width="wrap_content"

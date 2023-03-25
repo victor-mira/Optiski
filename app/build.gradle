@@ -1,14 +1,15 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
 }
 
 android {
-    namespace 'com.example.optiski'
+    namespace 'com.optiapk.optiski'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.optiski"
+        applicationId "com.optiapk.optiski"
         minSdk 24
         targetSdk 33
         versionCode 1
@@ -41,12 +42,16 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
-    implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
-    implementation 'com.google.firebase:firebase-auth:21.1.0'
     implementation 'com.google.android.gms:play-services-auth:20.4.1'
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
+    implementation platform('com.google.firebase:firebase-bom:31.2.3')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.code.gson:gson:2.8.5'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
 }
+
+apply plugin:'com.google.gms.google-services'

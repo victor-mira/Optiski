@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "812043946081",
-    "project_id": "optiski",
-    "storage_bucket": "optiski.appspot.com"
+    "project_number": "295480818850",
+    "project_id": "optiski-26451",
+    "storage_bucket": "optiski-26451.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:812043946081:android:4bb3f008f82c963c2b4220",
+        "mobilesdk_app_id": "1:295480818850:android:69058c4c965addd6f32bfb",
         "android_client_info": {
-          "package_name": "com.example.optiski"
+          "package_name": "com.optiapk.optiski"
         }
       },
       "oauth_client": [
         {
-          "client_id": "812043946081-hfg3pu9l1ir3k2bh3vv2f0glel058tqg.apps.googleusercontent.com",
+          "client_id": "295480818850-844nf60jagdb7jjl9ts1ki7bj5busl6t.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.optiski",
-            "certificate_hash": "5be5af7affce4b62f687410b63a855baafaf78eb"
+            "package_name": "com.optiapk.optiski",
+            "certificate_hash": "c193c7ed78b4ba644978cb9df028b1ff4074a502"
           }
         },
         {
-          "client_id": "812043946081-1u0sr3okkgfmi6v4s0019iqifjg0j8h4.apps.googleusercontent.com",
+          "client_id": "295480818850-10fd218ogp694hqv11nqm9ttlkjpn5ll.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDGqYz9nEfNTYUXm3K-Zn7DboYxWZN_GiU"
+          "current_key": "AIzaSyBBjj2BrTMH_YIc2t7G7XwtGfEjDqiCYC8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "812043946081-1u0sr3okkgfmi6v4s0019iqifjg0j8h4.apps.googleusercontent.com",
+              "client_id": "295480818850-10fd218ogp694hqv11nqm9ttlkjpn5ll.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
