@@ -39,38 +39,56 @@
         app:layout_constraintTop_toBottomOf="@+id/optiski"
         app:srcCompat="@drawable/gps_pin" />
 
-    <ImageView
-        android:id="@+id/clock"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/timelayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
-        android:contentDescription="@string/clock"
-        app:layout_constraintEnd_toStartOf="@+id/editTextTime"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gps"
-        app:srcCompat="@drawable/clock" />
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/choix_station"
+        >
 
-    <EditText
-        android:id="@+id/editTextTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:ems="10"
-        android:hint="@string/hour"
-        android:inputType="time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/choix_station" />
+        <ImageView
+            android:id="@+id/clock"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/clock"
+            app:srcCompat="@drawable/clock" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toStartOf="@id/helpButton"
+            app:layout_constraintStart_toStartOf="@id/clock">
+
+            <NumberPicker
+                android:id="@+id/hourpicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:timePickerMode="spinner" />
+
+            <NumberPicker
+                android:id="@+id/minutepicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:timePickerMode="spinner" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/helpButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white"
+            app:srcCompat="@drawable/question" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textNomAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="@string/nom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
+        app:layout_constraintTop_toBottomOf="@+id/timelayout" />
 
     <ImageView
         android:id="@+id/imageSkier"
