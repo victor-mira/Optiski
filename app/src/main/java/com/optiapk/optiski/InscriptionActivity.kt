@@ -22,21 +22,40 @@ class InscriptionActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
         val buttonNext = findViewById<Button>(R.id.nextButtonInscription)
-        val EditMail = findViewById<EditText>(R.id.enterEmailInscription)
-        val EditPassword = findViewById<EditText>(R.id.enterPasswordInscription)
-        val EditConfirmPassword = findViewById<EditText>(R.id.confirmPasswordInscription)
-        val buttonInscription = findViewById<Button>(R.id.inscriptionButton)
+        val editMail = findViewById<EditText>(R.id.enterEmailInscription)
+        val editPassword = findViewById<EditText>(R.id.enterPasswordInscription)
+        val editConfirmPassword = findViewById<EditText>(R.id.confirmPasswordInscription)
+        var buttonInscription:Button
 
         buttonNext.setOnClickListener {
-            setContentView(R.layout.activity_inscription2)
+            // TODO verif information completes sinon toast
+            setContentView(R.layout.activity_inscription2)//
+
+            buttonInscription = findViewById<Button>(R.id.inscriptionButton)
+
+            buttonInscription.setOnClickListener {
+                // TODO Verif password normes et confirmpassword
+                inscriptionWithPassword(editMail.text.toString(), editPassword.text.toString())
+            }
 //            val intent = Intent(this, ConnexionActivity::class.java)
 //            startActivity(intent)
         }
 
 
+
+
     }
 
-    public fun incriptionWithPassword(email: String, password: String) {
+    public override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        if(currentUser != null){
+            // UI change
+        }
+    }
+
+    fun inscriptionWithPassword(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -44,6 +63,8 @@ class InscriptionActivity : AppCompatActivity() {
                     Log.d(ContentValues.TAG, "createUserWithEmail:success")
                     val user = auth.currentUser
 //                    updateUI(user)
+                    val intent = Intent(this, ConnexionActivity::class.java)
+                    startActivity(intent)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(ContentValues.TAG, "createUserWithEmail:failure", task.exception)
