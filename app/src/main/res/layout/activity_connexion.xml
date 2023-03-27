@@ -17,7 +17,7 @@
         android:contentDescription="@string/logo_d_optiski" />
 
     <TextView
-        android:id="@+id/textMail"
+        android:id="@+id/textMailInscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <EditText
-        android:id="@+id/enterEmail"
+        android:id="@+id/enterEmailInscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -37,10 +37,10 @@
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textMail" />
+        app:layout_constraintTop_toBottomOf="@+id/textMailInscription" />
 
     <TextView
-        android:id="@+id/textPassword"
+        android:id="@+id/textPasswordInscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -48,10 +48,10 @@
         android:text="@string/mot_de_passe"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/enterEmailInscription" />
 
     <EditText
-        android:id="@+id/enterPassword"
+        android:id="@+id/enterPasswordInscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -60,27 +60,27 @@
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/textPasswordInscription" />
 
     <TextView
-        android:id="@+id/textOu"
+        android:id="@+id/textOuInscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/ou"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/enterPasswordInscription" />
 
     <Button
-        android:id="@+id/signInGoogleButtonAlternate"
+        android:id="@+id/signInGoogleButtonAlternateInscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/connexion_google_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textOu" />
+        app:layout_constraintTop_toBottomOf="@+id/textOuInscription" />
 
 <!--    <com.google.android.gms.common.SignInButton-->
 <!--        android:id="@+id/sign_in_button"-->
@@ -94,12 +94,12 @@
 
 
     <Button
-        android:id="@+id/nextButton"
+        android:id="@+id/nextButtonInscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signInGoogleButtonAlternate" />
+        app:layout_constraintTop_toBottomOf="@+id/signInGoogleButtonAlternateInscription" />
 </androidx.constraintlayout.widget.ConstraintLayout>

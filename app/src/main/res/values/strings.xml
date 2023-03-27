@@ -11,9 +11,11 @@
     <string name="adresse_mail">adresse Mail :</string>
     <string name="mail_example">mail@example.com</string>
     <string name="mot_de_passe">Mot de passe :</string>
+    <string name="confirmer_mot_de_passe">Confirmer le mot de passe :</string>
     <string name="password_example">********************</string>
     <string name="ou">Ou</string>
     <string name="next">next</string>
+    <string name="inscription_button_text">inscription</string>
     <string name="image_filler">image filler</string>
     <string name="nom">Nom</string>
     <string name="beginner">Débutant</string>
