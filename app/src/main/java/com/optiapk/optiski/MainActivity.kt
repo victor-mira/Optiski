@@ -12,7 +12,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -99,7 +98,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         buttonSignInGoogle.setOnClickListener {
-            signIn()
+            googleSignIn()
         }
 
         buttonSignUp.setOnClickListener {
@@ -116,7 +115,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     // [START signin]
-    private fun signIn() {
+    private fun googleSignIn() {
 
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
@@ -173,7 +172,7 @@ class MainActivity : AppCompatActivity() {
 
 
     companion object {
-        private const val TAG = "GoogleActivity"
-        private const val RC_SIGN_IN = 9001
+        const val TAG = "GoogleActivity"
+        public const val RC_SIGN_IN = 9001
     }
 }
