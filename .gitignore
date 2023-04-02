@@ -31,3 +31,6 @@ captures/
 local.properties
 *.iml
 *.iml
+.idea/modules/app/OptiSki.app.androidTest.iml
+.idea/modules/app/OptiSki.app.iml
+.idea/modules/app/OptiSki.app.main.iml
