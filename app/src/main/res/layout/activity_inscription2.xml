@@ -11,67 +11,48 @@
         android:id="@+id/inscriptionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:fontFamily="sans-serif"
         android:text="@string/inscription_text"
-        android:textSize="30sp"/>
-
-    <ImageView
-        android:id="@+id/imageFiller"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:contentDescription="@string/image_filler"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inscriptionText"
-        app:srcCompat="@drawable/image_filler" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editPersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="@string/nom"
+        android:textAlignment="center"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageFiller" />
+        app:layout_constraintBottom_toTopOf="@id/inscriptionViewPager"
+        app:layout_constraintTop_toBottomOf="@+id/inscriptionText" />
 
-    <RadioGroup
-        android:id="@+id/level_options"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checkedButton="@id/option_intermediate"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
+        app:tabBackground="@drawable/tab_selector"
+        app:tabGravity="center"
+        app:tabIndicatorHeight="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/inscriptionViewPager"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editPersonName"
-        app:layout_constraintBottom_toTopOf="@id/inscriptionButton">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/inscriptionButton"
+        app:tabMode="scrollable"
+        app:tabTextColor="@android:color/white" />
 
-        <RadioButton
-            android:id="@+id/option_beginner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="@string/beginner" />
-
-        <RadioButton
-            android:id="@+id/option_intermediate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="@string/intermediate" />
-
-        <RadioButton
-            android:id="@+id/option_advanced"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="@string/advanced" />
-    </RadioGroup>
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/inscriptionViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        app:layout_constraintBottom_toTopOf="@+id/tabLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPersonName" />
 
     <Button
         android:id="@+id/inscriptionButton"
@@ -82,8 +63,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

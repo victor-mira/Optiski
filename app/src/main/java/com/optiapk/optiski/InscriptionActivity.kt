@@ -1,17 +1,22 @@
 package com.optiapk.optiski
 
+
 import android.content.ContentValues
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -22,12 +27,17 @@ class InscriptionActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    lateinit var viewPager2: ViewPager2
+    var viewPagerItemArrayList: ArrayList<ViewPagerItem>? = null
+    private lateinit var niveauxExplicationsArray: Array<String>
+    private lateinit var niveauxArray : Array<String>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inscription1)
         supportActionBar?.hide()
+
 
         auth = FirebaseAuth.getInstance()
 
@@ -38,6 +48,7 @@ class InscriptionActivity : AppCompatActivity() {
         val editConfirmPassword = findViewById<EditText>(R.id.confirmPasswordInscription)
         var buttonInscription:Button
         var editPersonName:EditText
+
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.web_client_id))
@@ -58,6 +69,39 @@ class InscriptionActivity : AppCompatActivity() {
 
             buttonInscription = findViewById<Button>(R.id.inscriptionButton)
             editPersonName = findViewById<EditText>(R.id.editPersonName)
+
+            viewPager2 = findViewById(R.id.inscriptionViewPager)
+            val images = intArrayOf(
+                R.drawable.debutant,
+                R.drawable.intermediaire,
+                R.drawable.avance)
+
+            niveauxExplicationsArray = resources.getStringArray(R.array.niveaux_explications)
+            niveauxArray = resources.getStringArray(R.array.niveaux)
+
+            viewPagerItemArrayList = ArrayList()
+
+            for (i in images.indices) {
+                val viewPagerItem = ViewPagerItem(images[i], niveauxArray.get(i), niveauxExplicationsArray.get(i))
+                viewPagerItemArrayList!!.add(viewPagerItem)
+            }
+            val vpAdapter = VPAdapter(viewPagerItemArrayList!!)
+
+            viewPager2.setAdapter(vpAdapter)
+
+            viewPager2.setClipToPadding(false)
+
+            viewPager2.setClipChildren(false)
+
+            viewPager2.setOffscreenPageLimit(2)
+
+            viewPager2.getChildAt(0).overScrollMode = View.OVER_SCROLL_NEVER
+
+            var tabLayout = findViewById<TabLayout>(R.id.tabLayout)
+            TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
+                //tab.text = niveauxArray[position].substringBefore(' ')
+            }.attach()
+
 
             buttonInscription.setOnClickListener {
                 // TODO Verif password normes et confirmpassword

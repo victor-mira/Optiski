@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">OptiSki</string>
     <string name="optiski">OptiSki</string>
+    <string name="levels_image_path">levels/%d.jpg</string>
+    <string name="image_loading_error">Problem in loading image</string>
     <string name="logo_d_optiski">logo d\'OptiSki</string>
     <string name="connexion">connexion</string>
     <string name="connexion_google">connexion avec google</string>
@@ -52,7 +54,20 @@
         <item>Le Valinouet</item>
         <item>Bromont</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="niveaux">
+        <item>Débutant</item>
+        <item>Intermédiaire</item>
+        <item>Avancé</item>
+    </string-array>
+
+    <string-array name="niveaux_explications">
+        <item>Le niveau débutant vous proposera un itinéraire fait de pistes vertes et bleues,
+        afin de vous permettre de vous améliorer sans risque !</item>
+        <item>Le niveau intermédiaire rajoutera sur l\'itinéraire des pistes rouges,
+        pour plus de fun et de vitesse !</item>
+        <item>Le niveau avancé n\'a plus aucune restriction de pistes, et vous permettra donc
+        d\'aller ou bon vous semble !</item>
+    </string-array>
 
 </resources>
