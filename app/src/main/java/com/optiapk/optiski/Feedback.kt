@@ -14,7 +14,7 @@ class Feedback : AppCompatActivity() {
         val duree = (30..90).random()
 
         val textFinDescription: TextView = findViewById(R.id.textFinDescription)
-        textFinDescription.text = " Vous avez parcouru" + nbrPistes.toString() + "en" + duree.toString()
+        textFinDescription.text = " Vous avez parcouru " + nbrPistes.toString() + " pistes en " + duree.toString() +" minutes "
     }
 
 }
