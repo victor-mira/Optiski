@@ -1,17 +1,15 @@
 package com.optiapk.optiski
 
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
-import android.widget.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -22,9 +20,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.UserProfileChangeRequest
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
-import com.optiapk.optiski.enums.SkiLevelEnum
 import com.optiapk.optiski.models.User
 
 
@@ -54,7 +50,7 @@ class InscriptionActivity : AppCompatActivity() {
         val editConfirmPassword = findViewById<EditText>(R.id.confirmPasswordInscription)
         var buttonInscription:Button
         var editPersonName:EditText
-        var radioLevel:RadioGroup
+        var level:TextView
 
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -74,7 +70,8 @@ class InscriptionActivity : AppCompatActivity() {
 
             buttonInscription = findViewById<Button>(R.id.inscriptionButton)
             editPersonName = findViewById<EditText>(R.id.editPersonName)
-            radioLevel = findViewById<RadioGroup>(R.id.level_options)
+
+
 
 
 
@@ -111,9 +108,12 @@ class InscriptionActivity : AppCompatActivity() {
             }.attach()
 
 
+
             buttonInscription.setOnClickListener {
                 // TODO Verif password normes et confirmpassword
-                inscriptionWithPassword(editMail.text.toString(), editPassword.text.toString(), editPersonName.text.toString(), findViewById<RadioButton>(radioLevel.checkedRadioButtonId).text.toString())
+                var level = niveauxArray[viewPager2.currentItem]
+
+                inscriptionWithPassword(editMail.text.toString(), editPassword.text.toString(), editPersonName.text.toString(), level)
 
             }
 
@@ -170,6 +170,7 @@ class InscriptionActivity : AppCompatActivity() {
         // Ui change
     }
 
+    @SuppressLint("MissingInflatedId")
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             // check if user already have a level or not
@@ -182,8 +183,39 @@ class InscriptionActivity : AppCompatActivity() {
             editPersonName = findViewById<EditText>(R.id.editPersonName)
 
 
-            var radioLevel = findViewById<RadioGroup>(R.id.level_options)
 
+
+            viewPager2 = findViewById(R.id.inscriptionViewPager)
+            val images = intArrayOf(
+                R.drawable.debutant,
+                R.drawable.intermediaire,
+                R.drawable.avance)
+
+            niveauxExplicationsArray = resources.getStringArray(R.array.niveaux_explications)
+            niveauxArray = resources.getStringArray(R.array.niveaux)
+
+            viewPagerItemArrayList = ArrayList()
+
+            for (i in images.indices) {
+                val viewPagerItem = ViewPagerItem(images[i], niveauxArray.get(i), niveauxExplicationsArray.get(i))
+                viewPagerItemArrayList!!.add(viewPagerItem)
+            }
+            val vpAdapter = VPAdapter(viewPagerItemArrayList!!)
+
+            viewPager2.setAdapter(vpAdapter)
+
+            viewPager2.setClipToPadding(false)
+
+            viewPager2.setClipChildren(false)
+
+            viewPager2.setOffscreenPageLimit(2)
+
+            viewPager2.getChildAt(0).overScrollMode = View.OVER_SCROLL_NEVER
+
+            var tabLayout = findViewById<TabLayout>(R.id.tabLayout)
+            TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
+                //tab.text = niveauxArray[position].substringBefore(' ')
+            }.attach()
 
 
 
@@ -198,14 +230,15 @@ class InscriptionActivity : AppCompatActivity() {
                         .setDisplayName(editPersonName.text.toString())
                         .build()
                     auth.currentUser?.updateProfile(profileUpdates)
-                    var levelValue = findViewById<RadioButton>(radioLevel.checkedRadioButtonId).text.toString()
-                    val userRef = firestore.collection("users")
-                    user?.let {
-                        userRef.document(user.uid).update("userLevel", levelValue)
-                        userRef.document(user.uid).update("userName", editPersonName.text.toString())
-                    }
-
                 }
+
+                var levelValue = niveauxArray[viewPager2.currentItem]
+                val userRef = firestore.collection("users")
+                user?.let {
+                    userRef.document(user.uid).update("userLevel", levelValue)
+                    userRef.document(user.uid).update("userName", editPersonName.text.toString())
+                }
+
                 val intent = Intent(this, ChoicesActivity::class.java)
                 startActivity(intent)
             }
