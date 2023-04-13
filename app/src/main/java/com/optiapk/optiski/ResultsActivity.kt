@@ -35,11 +35,11 @@ class ResultsActivity : AppCompatActivity() {
             ioException.printStackTrace()
         }
         val gson = Gson()
-        var listPisteType = object : TypeToken<List<Piste>>() {}.type
+        var listPisteType = object : TypeToken<List<Station>>() {}.type
 
-        val pistes: List<Piste> = gson.fromJson(jsonString, listPisteType)
-        val pistes_shuffled = pistes.shuffled()
-        val pistes_sublist = pistes_shuffled.subList(0, abs(Random.nextInt()%(pistes.size-1)) +1)
+        val stations: List<Station> = gson.fromJson(jsonString, listPisteType)
+        val pistes_shuffled = stations[0].pistes.shuffled()
+        val pistes_sublist = pistes_shuffled.subList(0, abs(Random.nextInt()%(stations[0].pistes.size-1)) +1)
 
         /**----Results Adapter----**/
         val resultsAdapter = ResultsAdpater(pistes_sublist)

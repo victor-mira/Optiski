@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -13,6 +14,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.io.IOException
+import java.util.*
 
 class ChoicesActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -37,7 +42,7 @@ class ChoicesActivity : AppCompatActivity() {
 
         val buttonResult = findViewById<ImageButton>(R.id.imageButton)
         val signoutButton = findViewById<ImageButton>(R.id.signOutGoogleButton)
-        val stations = resources.getStringArray(R.array.Stations)
+        var stations = resources.getStringArray(R.array.Stations)
         val spinner = findViewById<Spinner>(R.id.choix_station)
         val buttonHelp = findViewById<ImageButton>(R.id.helpButton)
 
@@ -60,6 +65,29 @@ class ChoicesActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, R.string.position_denied, Toast.LENGTH_SHORT).show()
         }
         builderAlert.show()
+
+        /**----Creation de la liste des pistes------**/
+        var jsonString :String = ""
+        try {
+            jsonString = this.assets.open("pistes.json").bufferedReader().use { it.readText() }
+        } catch (ioException: IOException) {
+            ioException.printStackTrace()
+        }
+        val gson = Gson()
+        var listPisteType = object : TypeToken<List<Station>>() {}.type
+
+        val coords= doubleArrayOf(4.95,5.0)
+        val stations_json: List<Station> = gson.fromJson(jsonString, listPisteType)
+        var title = ""
+        stations_json.forEach{station ->
+            if (station.coords[0]>coords[0]-0.01 && station.coords[0]<coords[0]+0.01
+                && station.coords[1]>coords[1]-0.01 && station.coords[1]<coords[1]+0.01) {
+                title = station.title
+            }
+        }
+        if(!title.equals(""))
+            stations[0]=stations[stations.indexOf(title)]
+                .also{stations[stations.indexOf(title)]=stations[0]}
 
         if (spinner != null) {
             val adapter = ArrayAdapter(
