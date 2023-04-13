@@ -45,6 +45,8 @@
     <string name="reject">Refuser</string>
     <string name="position_accept">Localisation activée</string>
     <string name="position_denied">Nous n\'utiliserons pas votre localisation</string>
+    <string name="fin_de_session">Félicitations ! Vous avez fini votre session de ski !</string>
+    <string name="image_de_fin">Image de fin</string>
 
     <string-array name="Stations">
         <item>La Rosière</item>
@@ -53,6 +55,8 @@
         <item>Méribel</item>
         <item>Le Valinouet</item>
         <item>Bromont</item>
+        <item>Mont-Belu</item>
+        <item>Valinouet</item>
     </string-array>
 
     <string-array name="niveaux">

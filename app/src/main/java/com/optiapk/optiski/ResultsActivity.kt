@@ -7,9 +7,14 @@ import com.google.gson.Gson
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.TextView
+import androidx.core.view.get
+import androidx.viewpager2.widget.ViewPager2
 import com.optiapk.optiski.models.Piste
 import com.google.gson.reflect.TypeToken
 import java.io.IOException
@@ -21,6 +26,8 @@ class ResultsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_results)
         supportActionBar?.hide()
+
+        /**----Creation de la liste des pistes------**/
         var jsonString :String = ""
         try {
             jsonString = this.assets.open("pistes.json").bufferedReader().use { it.readText() }
@@ -28,12 +35,44 @@ class ResultsActivity : AppCompatActivity() {
             ioException.printStackTrace()
         }
         val gson = Gson()
-        var listPisteType = object : TypeToken<List<Piste>>() {}.type
+        var listPisteType = object : TypeToken<List<Station>>() {}.type
 
-        val pistes: List<Piste> = gson.fromJson(jsonString, listPisteType)
-        val pistes_shuffled = pistes.shuffled()
-        val pistes_sublist = pistes_shuffled.subList(0, abs(Random.nextInt()%(pistes.size-1)) +1)
-        pistes_sublist.forEach{ piste ->
+        val stations: List<Station> = gson.fromJson(jsonString, listPisteType)
+        val pistes_shuffled = stations[0].pistes.shuffled()
+        val pistes_sublist = pistes_shuffled.subList(0, abs(Random.nextInt()%(stations[0].pistes.size-1)) +1)
+
+        /**----Results Adapter----**/
+        val resultsAdapter = ResultsAdpater(pistes_sublist)
+        val viewPager2 = findViewById<ViewPager2>(R.id.trackpad)
+        viewPager2.adapter=resultsAdapter
+        viewPager2.clipToPadding=false
+        viewPager2.clipChildren=false
+        viewPager2.offscreenPageLimit=2
+        viewPager2.get(0).overScrollMode= View.OVER_SCROLL_NEVER
+
+        /**----Set Button Listener----**/
+        val buttonNext = findViewById<Button>(R.id.buttonTrackListNext)
+        val buttonPrevious = findViewById<Button>(R.id.buttonTrackListPrevious)
+        buttonNext.setOnClickListener{
+            if (viewPager2.currentItem < pistes_sublist.size-1) {
+                viewPager2.currentItem++
+                buttonPrevious.isEnabled=true
+            }
+            if (viewPager2.currentItem == pistes_sublist.size-1) {
+                buttonNext.isEnabled=false
+            }
+        }
+        findViewById<Button>(R.id.buttonTrackListPrevious).setOnClickListener{
+            if (viewPager2.currentItem > 0) {
+                viewPager2.currentItem--
+                buttonNext.isEnabled=true
+            }
+            if (viewPager2.currentItem == 0) {
+                buttonPrevious.isEnabled=false
+            }
+        }
+        /*----Affichage de la liste des pistes------*/
+        /*pistes_sublist.forEach{ piste ->
             val lineBorder = LinearLayout(this)
             val tv_piste = TextView(lineBorder.context)
             tv_piste.textSize = 25f
@@ -51,6 +90,6 @@ class ResultsActivity : AppCompatActivity() {
             lineBorder.addView(img_view)
             findViewById<LinearLayout>(R.id.scrollLayoutResult).addView(lineBorder)
             Log.i("data", piste.number)
-        }
+        }*/
     }
 }
