@@ -93,13 +93,15 @@
 
     <ImageView
         android:id="@+id/imageSkier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="221dp"
+        android:layout_height="214dp"
         android:contentDescription="@string/skier_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textNomAccount"
         app:srcCompat="@drawable/image_filler" />
+
+
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -121,6 +123,7 @@
         android:layout_marginTop="3dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white"
         app:srcCompat="@drawable/logout" />
 
 
