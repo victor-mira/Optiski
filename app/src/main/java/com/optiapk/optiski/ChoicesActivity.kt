@@ -1,5 +1,6 @@
 package com.optiapk.optiski
 
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -16,8 +17,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.optiapk.optiski.models.Piste
 import java.io.IOException
 import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.math.abs
+import kotlin.random.Random
 
 class ChoicesActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
@@ -28,6 +33,10 @@ class ChoicesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choices)
         supportActionBar?.hide()
+
+        val sharedPref = getSharedPreferences(
+            "Infos", Context.MODE_PRIVATE)
+        val myEdit = sharedPref.edit()
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.web_client_id))
@@ -74,7 +83,7 @@ class ChoicesActivity : AppCompatActivity() {
             ioException.printStackTrace()
         }
         val gson = Gson()
-        var listPisteType = object : TypeToken<List<Station>>() {}.type
+        val listPisteType = object : TypeToken<List<Station>>() {}.type
 
         val coords= doubleArrayOf(4.95,5.0)
         val stations_json: List<Station> = gson.fromJson(jsonString, listPisteType)
@@ -96,7 +105,7 @@ class ChoicesActivity : AppCompatActivity() {
             )
             spinner.adapter = adapter
 
-            spinner.onItemSelectedListener = object :
+            /*spinner.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>,
@@ -115,11 +124,53 @@ class ChoicesActivity : AppCompatActivity() {
                         getString(R.string.choix_station), Toast.LENGTH_SHORT
                     )
                 }
-            }
+            }*/
         }
 
         buttonResult.setOnClickListener {
             val intent = Intent(this, ResultsActivity::class.java)
+            val position : Int = 0
+            val niveau : Int = 1
+
+            var jsonString :String = ""
+            try {
+                jsonString = this.assets.open("pistes.json").bufferedReader().use { it.readText() }
+            } catch (ioException: IOException) {
+                ioException.printStackTrace()
+            }
+            val gson = Gson()
+            val listPisteType = object : TypeToken<List<Station>>() {}.type
+
+
+            val stations: List<Station> = gson.fromJson(jsonString, listPisteType)
+            val pistes_shuffled  = stations[0].pistes.shuffled()
+            val pistes_sublist = pistes_shuffled.subList(0, abs(Random.nextInt()%(stations[0].pistes.size-1)) +1)
+
+            val pisteSublistName  = ArrayList<String>()
+            val pisteSublistDifficulty = ArrayList<Int>()
+            val pisteSublistTime = ArrayList<Int>()
+
+            for (element in pistes_sublist) {
+                pisteSublistName.add(element.number)
+                pisteSublistDifficulty.add(element.difficulty)
+                pisteSublistTime.add(element.time[0])
+            }
+
+
+
+            val jsonName = gson.toJson(pisteSublistName)
+            val jsonDifficulty = gson.toJson(pisteSublistDifficulty)
+            val jsonTime = gson.toJson(pisteSublistTime)//converting list to Json
+
+            myEdit.putInt("position", position)
+            myEdit.putString("number", jsonName)
+            myEdit.putString("difficulty", jsonDifficulty)
+            myEdit.putString("time", jsonTime)
+            myEdit.apply()
+
+
+
+
             startActivity(intent)
         }
         buttonHelp.setOnClickListener {
@@ -156,4 +207,6 @@ class ChoicesActivity : AppCompatActivity() {
 
 
     }
+
+
 }
