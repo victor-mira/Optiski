@@ -31,6 +31,7 @@ class ResultsAdpater(var trackList: List<PisteFinal>) :
         val bitmap = Bitmap.createBitmap(100, 20, Bitmap.Config.ARGB_8888)
         val canvas= Canvas(bitmap)
         when(track.difficulty) {
+            0 -> canvas.drawColor(Color.GRAY)
             1 -> canvas.drawColor(Color.GREEN)
             2-> canvas.drawColor(Color.BLUE)
             3-> canvas.drawColor(Color.BLACK)

@@ -108,10 +108,11 @@ class ResultsActivity : AppCompatActivity() {
 
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        val images = IntArray(3)
-        images[0] = R.drawable.debutant
-        images[1] = R.drawable.intermediaire
-        images[2] = R.drawable.avance
+        val images = IntArray(4)
+        images[0] = R.drawable.lift
+        images[1] = R.drawable.debutant
+        images[2] = R.drawable.intermediaire
+        images[3] = R.drawable.avance
 
 
 
@@ -262,12 +263,20 @@ class ResultsActivity : AppCompatActivity() {
             notificationChannel.enableVibration(false)
             notificationManager.createNotificationChannel(notificationChannel)
 
+            var text : String
+
+            if(pisteSublist[position].difficulty == 0){
+                text = "C'est l'heure de la remontée !"
+            } else {
+                text = "Temps estimé pour faire cette piste : ${pisteSublist[position].time} min"
+            }
+
 
             builder = Notification.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.baseline_downhill_skiing)
-                .setLargeIcon(BitmapFactory.decodeResource(this.resources, images[pisteSublist[position].difficulty - 1]))
+                .setLargeIcon(BitmapFactory.decodeResource(this.resources, images[pisteSublist[position].difficulty]))
                 .setContentTitle(pisteSublist[position].number)
-                .setContentText("Temps estimé pour faire cette piste : ${pisteSublist[position].time} min")
+                .setContentText(text)
                 .setOnlyAlertOnce(true)
                 .setContentIntent(pendingIntentReturnApp)
                 .setAutoCancel(true)
