@@ -1,261 +1,978 @@
 [
-  {
-    "title": "Mont-Belu",
+  {"title": "La Rosière",
     "coords": [48.323926,-70.838220],
-    "pistes":[{
-      "number": "1",
-      "difficulty": 1,
-      "time": [
-        45,
-        15,
-        5
-      ]
-    },
-    {
-      "number": "1A",
-      "difficulty": 3,
-      "time": [
-        300,
-        5,
-        2
-      ]
-    },
-    {
-      "number": "2",
-      "difficulty": 3,
-      "time": [
-        300,
-        10,
-        4
-      ]
-    },
-    {
-      "number": "2A",
-      "difficulty": 3,
-      "time": [
-        300,
-        10,
-        5
-      ]
-    },
-    {
-      "number": "2B",
-      "difficulty": 3,
-      "time": [
-        300,
-        10,
-        5
-      ]
-    },
-    {
-      "number": "3",
-      "difficulty": 3,
-      "time": [
-        300,
-        10,
-        5
-      ]
-    },
-    {
-      "number": "3A",
-      "difficulty": 3,
-      "time": [
-        300,
-        10,
-        5
-      ]
-    },
-    {
-      "number": "4",
-      "difficulty": 3,
-      "time": [
-        300,
-        10,
-        5
-      ]
-    },
-    {
-      "number": "5",
-      "difficulty": 3,
-      "time": [
-        300,
-        10,
-        5
-      ]
-    },
-    {
-      "number": "6",
-      "difficulty": 1,
-      "time": [
-        30,
-        10,
-        5
-      ]
-    },
-    {
-      "number": "7",
-      "difficulty": 2,
-      "time": [
-        45,
-        10,
-        5
-      ]
-    },
-    {
-      "number": "8",
-      "difficulty": 3,
-      "time": [
-        300,
-        10,
-        5
-      ]
-    },
-    {
-      "number": "9",
-      "difficulty": 3,
-      "time": [
-        300,
-        10,
-        5
-      ]
-    },
-    {
-      "number": "10",
-      "difficulty": 3,
-      "time": [
-        300,
-        10,
-        5
-      ]
-    }]
-  },
-  {"title": "Valinouet",
-    "coords": [5.0,5.0],
-    "pistes":[{
-      "number": "1",
-      "difficulty": 1,
-      "time": [
-        45,
-        15,
-        5
-      ]
-    },
+    "pistes":[
       {
-        "number": "1A",
+        "start_lift": 1,
+        "number": "Piste 10&7",
         "difficulty": 3,
-        "time": [
-          300,
-          5,
-          2
-        ]
+        "distance" : 1000,
+        "time": [300, 150, 10],
+        "end_lift" : [1, 2]
       },
       {
-        "number": "2",
+        "start_lift": 1,
+        "number": "Piste 9&7",
         "difficulty": 3,
-        "time": [
-          300,
-          10,
-          4
-        ]
+        "distance": 1320,
+        "time": [300, 150, 15],
+        "end_lift" : [1, 2]
       },
       {
-        "number": "2A",
+        "start_lift": 1,
+        "number": "Piste 9,8&7",
         "difficulty": 3,
-        "time": [
-          300,
-          10,
-          5
-        ]
+        "distance": 1100,
+        "time": [300, 150, 12],
+        "end_lift": [1, 2]
       },
       {
-        "number": "2B",
+        "start_lift": 1,
+        "number": "Piste 7,8&7",
         "difficulty": 3,
-        "time": [
-          300,
-          10,
-          5
-        ]
+        "distance": 1200,
+        "time": [300, 150, 13],
+        "end_lift": [1, 2]
       },
       {
-        "number": "3",
-        "difficulty": 3,
-        "time": [
-          300,
-          10,
-          5
-        ]
-      },
-      {
-        "number": "3A",
-        "difficulty": 3,
-        "time": [
-          300,
-          10,
-          5
-        ]
-      },
-      {
-        "number": "4",
-        "difficulty": 3,
-        "time": [
-          300,
-          10,
-          5
-        ]
-      },
-      {
-        "number": "5",
-        "difficulty": 3,
-        "time": [
-          300,
-          10,
-          5
-        ]
-      },
-      {
-        "number": "6",
-        "difficulty": 1,
-        "time": [
-          30,
-          10,
-          5
-        ]
-      },
-      {
-        "number": "7",
+        "start_lift": 1,
+        "number": "Piste 7",
         "difficulty": 2,
-        "time": [
-          45,
-          10,
-          5
-        ]
+        "distance": 1020,
+        "time": [45, 10, 5],
+        "end_lift": [1, 2]
       },
       {
-        "number": "8",
-        "difficulty": 3,
-        "time": [
-          300,
-          10,
-          5
-        ]
+        "start_lift": 2,
+        "number": "Piste 7&6",
+        "difficulty": 1,
+        "distance": 1020,
+        "time": [25, 7, 3],
+        "end_lift": [1, 2]
       },
       {
-        "number": "9",
-        "difficulty": 3,
-        "time": [
-          300,
-          10,
-          5
-        ]
+        "start_lift":2,
+        "number": "Piste 6",
+        "difficulty": 1,
+        "distance":1020,
+        "time": [25, 7, 3],
+        "end_lift": [1, 2]
       },
       {
-        "number": "10",
+        "start_lift": 2,
+        "number": "Piste 4,5&1",
         "difficulty": 3,
-        "time": [
-          300,
-          10,
-          5
-        ]
+        "distance":1000,
+        "time": [300, 150, 10],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 4&1",
+        "difficulty": 3,
+        "distance": 1200,
+        "time":[300, 150, 13],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 4,3A&1",
+        "difficulty": 3,
+        "distance": 1300,
+        "time": [300, 150, 15],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 3&1",
+        "difficulty": 2,
+        "distance": 1400,
+        "time": [150, 15, 5],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1,2A,3&1",
+        "difficulty": 3,
+        "distance": 1700,
+        "time": [300, 150, 17],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1,2,3&1",
+        "difficulty": 3,
+        "distance": 2000,
+        "time": [300, 150, 20],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1",
+        "difficulty": 1,
+        "distance": 1250,
+        "time": [25, 12, 5],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1,2A&1",
+        "difficulty": 3,
+        "distance": 1500,
+        "time": [300, 150, 15],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1,1A&1",
+        "difficulty": 3,
+        "distance": 1700,
+        "time": [300, 150, 17],
+        "end_lift": [1, 2]
+      }],
+    "lifts":[
+      {"number": 1,
+        "time" : 10
+      },
+      {
+        "number": 2,
+        "time": 12
+      }]
+  },
+  {"title": "Les Arcs",
+    "coords": [48.436751,-71.228056],
+    "pistes" :[
+      {
+        "start_lift": 1,
+        "number": "Piste 8",
+        "difficulty": 3,
+        "distance" : 800,
+        "time": [300, 150, 8],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 7",
+        "difficulty": 3,
+        "distance" : 700,
+        "time": [300, 150, 7],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 6",
+        "difficulty": 2,
+        "distance" : 1000,
+        "time": [150, 20, 5],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 5",
+        "difficulty": 2,
+        "distance" : 1000,
+        "time": [150, 20, 5],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 4A",
+        "difficulty": 2,
+        "distance" : 1000,
+        "time": [150,20,5],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 4",
+        "difficulty": 3,
+        "distance" : 1000,
+        "time": [300, 150, 10],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 3",
+        "difficulty": 3,
+        "distance" : 1300,
+        "time": [300, 150, 12],
+        "end_lift" : [1, 2, 3]
+      },
+      {
+        "start_lift": 3,
+        "number": "Piste 2A",
+        "difficulty": 3,
+        "distance" : 1000,
+        "time": [300, 150, 10],
+        "end_lift" : [1,2, 3]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 2",
+        "difficulty": 2,
+        "distance" : 1000,
+        "time": [150, 20, 5],
+        "end_lift" : [1,2,3]
+      },
+      {
+        "start_lift": 3,
+        "number": "Piste 1A",
+        "difficulty": 1,
+        "distance" : 1000,
+        "time": [30, 10, 2],
+        "end_lift" : [1, 2, 3]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 1",
+        "difficulty": 1,
+        "distance" : 700,
+        "time": [25, 7, 2],
+        "end_lift" : [1, 2, 3]
+      }],
+    "lifts":[
+      {"number": 1,
+        "time" : 10
+      },
+      {
+        "number": 2,
+        "time": 12
+      },
+      {
+        "number": 3,
+        "time" : 11
+      }]
+  },
+  {"title": "Courchevel",
+    "coords": [48.323926,-70.838220],
+    "pistes":[
+      {
+        "start_lift": 1,
+        "number": "Piste 10&7",
+        "difficulty": 3,
+        "distance" : 1000,
+        "time": [300, 150, 10],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 9&7",
+        "difficulty": 3,
+        "distance": 1320,
+        "time": [300, 150, 15],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 9,8&7",
+        "difficulty": 3,
+        "distance": 1100,
+        "time": [300, 150, 12],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 7,8&7",
+        "difficulty": 3,
+        "distance": 1200,
+        "time": [300, 150, 13],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 7",
+        "difficulty": 2,
+        "distance": 1020,
+        "time": [45, 10, 5],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 7&6",
+        "difficulty": 1,
+        "distance": 1020,
+        "time": [25, 7, 3],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift":2,
+        "number": "Piste 6",
+        "difficulty": 1,
+        "distance":1020,
+        "time": [25, 7, 3],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 4,5&1",
+        "difficulty": 3,
+        "distance":1000,
+        "time": [300, 150, 10],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 4&1",
+        "difficulty": 3,
+        "distance": 1200,
+        "time":[300, 150, 13],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 4,3A&1",
+        "difficulty": 3,
+        "distance": 1300,
+        "time": [300, 150, 15],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 3&1",
+        "difficulty": 2,
+        "distance": 1400,
+        "time": [150, 15, 5],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1,2A,3&1",
+        "difficulty": 3,
+        "distance": 1700,
+        "time": [300, 150, 17],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1,2,3&1",
+        "difficulty": 3,
+        "distance": 2000,
+        "time": [300, 150, 20],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1",
+        "difficulty": 1,
+        "distance": 1250,
+        "time": [25, 12, 5],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1,2A&1",
+        "difficulty": 3,
+        "distance": 1500,
+        "time": [300, 150, 15],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1,1A&1",
+        "difficulty": 3,
+        "distance": 1700,
+        "time": [300, 150, 17],
+        "end_lift": [1, 2]
+      }],
+    "lifts":[
+      {"number": 1,
+        "time" : 10
+      },
+      {
+        "number": 2,
+        "time": 12
+      }]
+  },
+  {"title": "Méribel",
+    "coords": [48.436751,-71.228056],
+    "pistes" :[
+      {
+        "start_lift": 1,
+        "number": "Piste 8",
+        "difficulty": 3,
+        "distance" : 800,
+        "time": [300, 150, 8],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 7",
+        "difficulty": 3,
+        "distance" : 700,
+        "time": [300, 150, 7],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 6",
+        "difficulty": 2,
+        "distance" : 1000,
+        "time": [150, 20, 5],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 5",
+        "difficulty": 2,
+        "distance" : 1000,
+        "time": [150, 20, 5],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 4A",
+        "difficulty": 2,
+        "distance" : 1000,
+        "time": [150,20,5],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 4",
+        "difficulty": 3,
+        "distance" : 1000,
+        "time": [300, 150, 10],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 3",
+        "difficulty": 3,
+        "distance" : 1300,
+        "time": [300, 150, 12],
+        "end_lift" : [1, 2, 3]
+      },
+      {
+        "start_lift": 3,
+        "number": "Piste 2A",
+        "difficulty": 3,
+        "distance" : 1000,
+        "time": [300, 150, 10],
+        "end_lift" : [1,2, 3]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 2",
+        "difficulty": 2,
+        "distance" : 1000,
+        "time": [150, 20, 5],
+        "end_lift" : [1,2,3]
+      },
+      {
+        "start_lift": 3,
+        "number": "Piste 1A",
+        "difficulty": 1,
+        "distance" : 1000,
+        "time": [30, 10, 2],
+        "end_lift" : [1, 2, 3]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 1",
+        "difficulty": 1,
+        "distance" : 700,
+        "time": [25, 7, 2],
+        "end_lift" : [1, 2, 3]
+      }],
+    "lifts":[
+      {"number": 1,
+        "time" : 10
+      },
+      {
+        "number": 2,
+        "time": 12
+      },
+      {
+        "number": 3,
+        "time" : 11
+      }]
+  },
+  {"title": "Le Valinouet",
+    "coords": [48.323926,-70.838220],
+    "pistes":[
+      {
+        "start_lift": 1,
+        "number": "Piste 10&7",
+        "difficulty": 3,
+        "distance" : 1000,
+        "time": [300, 150, 10],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 9&7",
+        "difficulty": 3,
+        "distance": 1320,
+        "time": [300, 150, 15],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 9,8&7",
+        "difficulty": 3,
+        "distance": 1100,
+        "time": [300, 150, 12],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 7,8&7",
+        "difficulty": 3,
+        "distance": 1200,
+        "time": [300, 150, 13],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 7",
+        "difficulty": 2,
+        "distance": 1020,
+        "time": [45, 10, 5],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 7&6",
+        "difficulty": 1,
+        "distance": 1020,
+        "time": [25, 7, 3],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift":2,
+        "number": "Piste 6",
+        "difficulty": 1,
+        "distance":1020,
+        "time": [25, 7, 3],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 4,5&1",
+        "difficulty": 3,
+        "distance":1000,
+        "time": [300, 150, 10],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 4&1",
+        "difficulty": 3,
+        "distance": 1200,
+        "time":[300, 150, 13],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 4,3A&1",
+        "difficulty": 3,
+        "distance": 1300,
+        "time": [300, 150, 15],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 3&1",
+        "difficulty": 2,
+        "distance": 1400,
+        "time": [150, 15, 5],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1,2A,3&1",
+        "difficulty": 3,
+        "distance": 1700,
+        "time": [300, 150, 17],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1,2,3&1",
+        "difficulty": 3,
+        "distance": 2000,
+        "time": [300, 150, 20],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1",
+        "difficulty": 1,
+        "distance": 1250,
+        "time": [25, 12, 5],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1,2A&1",
+        "difficulty": 3,
+        "distance": 1500,
+        "time": [300, 150, 15],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1,1A&1",
+        "difficulty": 3,
+        "distance": 1700,
+        "time": [300, 150, 17],
+        "end_lift": [1, 2]
+      }],
+    "lifts":[
+      {"number": 1,
+        "time" : 10
+      },
+      {
+        "number": 2,
+        "time": 12
+      }]
+  },
+  {"title": "Bromont",
+    "coords": [48.436751,-71.228056],
+    "pistes" :[
+      {
+        "start_lift": 1,
+        "number": "Piste 8",
+        "difficulty": 3,
+        "distance" : 800,
+        "time": [300, 150, 8],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 7",
+        "difficulty": 3,
+        "distance" : 700,
+        "time": [300, 150, 7],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 6",
+        "difficulty": 2,
+        "distance" : 1000,
+        "time": [150, 20, 5],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 5",
+        "difficulty": 2,
+        "distance" : 1000,
+        "time": [150, 20, 5],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 4A",
+        "difficulty": 2,
+        "distance" : 1000,
+        "time": [150,20,5],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 4",
+        "difficulty": 3,
+        "distance" : 1000,
+        "time": [300, 150, 10],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 3",
+        "difficulty": 3,
+        "distance" : 1300,
+        "time": [300, 150, 12],
+        "end_lift" : [1, 2, 3]
+      },
+      {
+        "start_lift": 3,
+        "number": "Piste 2A",
+        "difficulty": 3,
+        "distance" : 1000,
+        "time": [300, 150, 10],
+        "end_lift" : [1,2, 3]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 2",
+        "difficulty": 2,
+        "distance" : 1000,
+        "time": [150, 20, 5],
+        "end_lift" : [1,2,3]
+      },
+      {
+        "start_lift": 3,
+        "number": "Piste 1A",
+        "difficulty": 1,
+        "distance" : 1000,
+        "time": [30, 10, 2],
+        "end_lift" : [1, 2, 3]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 1",
+        "difficulty": 1,
+        "distance" : 700,
+        "time": [25, 7, 2],
+        "end_lift" : [1, 2, 3]
+      }],
+    "lifts":[
+      {"number": 1,
+        "time" : 10
+      },
+      {
+        "number": 2,
+        "time": 12
+      },
+      {
+        "number": 3,
+        "time" : 11
+      }]
+  },
+  {"title": "Mont-Belu",
+    "coords": [48.323926,-70.838220],
+    "pistes":[
+      {
+        "start_lift": 1,
+        "number": "Piste 10&7",
+        "difficulty": 3,
+        "distance" : 1000,
+        "time": [300, 150, 10],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 9&7",
+        "difficulty": 3,
+        "distance": 1320,
+        "time": [300, 150, 15],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 9,8&7",
+        "difficulty": 3,
+        "distance": 1100,
+        "time": [300, 150, 12],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 7,8&7",
+        "difficulty": 3,
+        "distance": 1200,
+        "time": [300, 150, 13],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 7",
+        "difficulty": 2,
+        "distance": 1020,
+        "time": [45, 10, 5],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 7&6",
+        "difficulty": 1,
+        "distance": 1020,
+        "time": [25, 7, 3],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift":2,
+        "number": "Piste 6",
+        "difficulty": 1,
+        "distance":1020,
+        "time": [25, 7, 3],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 4,5&1",
+        "difficulty": 3,
+        "distance":1000,
+        "time": [300, 150, 10],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 4&1",
+        "difficulty": 3,
+        "distance": 1200,
+        "time":[300, 150, 13],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 4,3A&1",
+        "difficulty": 3,
+        "distance": 1300,
+        "time": [300, 150, 15],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 3&1",
+        "difficulty": 2,
+        "distance": 1400,
+        "time": [150, 15, 5],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1,2A,3&1",
+        "difficulty": 3,
+        "distance": 1700,
+        "time": [300, 150, 17],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1,2,3&1",
+        "difficulty": 3,
+        "distance": 2000,
+        "time": [300, 150, 20],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1",
+        "difficulty": 1,
+        "distance": 1250,
+        "time": [25, 12, 5],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1,2A&1",
+        "difficulty": 3,
+        "distance": 1500,
+        "time": [300, 150, 15],
+        "end_lift": [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 1,1A&1",
+        "difficulty": 3,
+        "distance": 1700,
+        "time": [300, 150, 17],
+        "end_lift": [1, 2]
+      }],
+    "lifts":[
+      {"number": 1,
+        "time" : 10
+      },
+      {
+        "number": 2,
+        "time": 12
+      }]
+  },
+  {"title": "Mont-Fortin",
+    "coords": [48.436751,-71.228056],
+    "pistes" :[
+      {
+        "start_lift": 1,
+        "number": "Piste 8",
+        "difficulty": 3,
+        "distance" : 800,
+        "time": [300, 150, 8],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 7",
+        "difficulty": 3,
+        "distance" : 700,
+        "time": [300, 150, 7],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 6",
+        "difficulty": 2,
+        "distance" : 1000,
+        "time": [150, 20, 5],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 5",
+        "difficulty": 2,
+        "distance" : 1000,
+        "time": [150, 20, 5],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 4A",
+        "difficulty": 2,
+        "distance" : 1000,
+        "time": [150,20,5],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 4",
+        "difficulty": 3,
+        "distance" : 1000,
+        "time": [300, 150, 10],
+        "end_lift" : [1, 2]
+      },
+      {
+        "start_lift": 2,
+        "number": "Piste 3",
+        "difficulty": 3,
+        "distance" : 1300,
+        "time": [300, 150, 12],
+        "end_lift" : [1, 2, 3]
+      },
+      {
+        "start_lift": 3,
+        "number": "Piste 2A",
+        "difficulty": 3,
+        "distance" : 1000,
+        "time": [300, 150, 10],
+        "end_lift" : [1,2, 3]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 2",
+        "difficulty": 2,
+        "distance" : 1000,
+        "time": [150, 20, 5],
+        "end_lift" : [1,2,3]
+      },
+      {
+        "start_lift": 3,
+        "number": "Piste 1A",
+        "difficulty": 1,
+        "distance" : 1000,
+        "time": [30, 10, 2],
+        "end_lift" : [1, 2, 3]
+      },
+      {
+        "start_lift": 1,
+        "number": "Piste 1",
+        "difficulty": 1,
+        "distance" : 700,
+        "time": [25, 7, 2],
+        "end_lift" : [1, 2, 3]
+      }],
+    "lifts":[
+      {"number": 1,
+        "time" : 10
+      },
+      {
+        "number": 2,
+        "time": 12
+      },
+      {
+        "number": 3,
+        "time" : 11
       }]
   }
 ]
