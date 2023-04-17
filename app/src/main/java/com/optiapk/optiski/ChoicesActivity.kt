@@ -112,6 +112,7 @@ class ChoicesActivity : AppCompatActivity() {
                     view: View, position: Int, id: Long
                 ) {
                     myEdit.putString("station", stations[position])
+                    myEdit.apply()
                 }
 
                     /*Toast.makeText(
@@ -128,8 +129,11 @@ class ChoicesActivity : AppCompatActivity() {
 
         buttonResult.setOnClickListener {
             val intent = Intent(this, ResultsActivity::class.java)
-            val position : Int = 0
+            val pos : Int = 0
             val niveau : Int = 1
+            var stationChoisie = sharedPref.getString("station", null)
+            val index = stations.indexOf(stationChoisie)
+            val timeLeft = hourpicker.value * 60 + minutepicker.value * 15
 
             var jsonString :String = ""
             try {
@@ -142,8 +146,9 @@ class ChoicesActivity : AppCompatActivity() {
 
 
             val stations: List<Station> = gson.fromJson(jsonString, listPisteType)
-            val pistes_shuffled  = stations[0].pistes.shuffled()
-            val pistes_sublist = pistes_shuffled.subList(0, abs(Random.nextInt()%(stations[0].pistes.size-1)) +1)
+            val pisteShuffled  = stations[index].pistes.shuffled()
+
+            val pistes_sublist = FillList(timeLeft, niveau, pisteShuffled)
 
             val pisteSublistName  = ArrayList<String>()
             val pisteSublistDifficulty = ArrayList<Int>()
@@ -152,7 +157,7 @@ class ChoicesActivity : AppCompatActivity() {
             for (element in pistes_sublist) {
                 pisteSublistName.add(element.number)
                 pisteSublistDifficulty.add(element.difficulty)
-                pisteSublistTime.add(element.time[0])
+                pisteSublistTime.add(element.time[niveau])
             }
 
 
@@ -161,7 +166,7 @@ class ChoicesActivity : AppCompatActivity() {
             val jsonDifficulty = gson.toJson(pisteSublistDifficulty)
             val jsonTime = gson.toJson(pisteSublistTime)//converting list to Json
 
-            myEdit.putInt("position", position)
+            myEdit.putInt("position", pos)
             myEdit.putString("number", jsonName)
             myEdit.putString("difficulty", jsonDifficulty)
             myEdit.putString("time", jsonTime)
@@ -203,8 +208,26 @@ class ChoicesActivity : AppCompatActivity() {
             startActivity(intent)
             // No user is signed in
         }
+    }
+
+    private fun FillList(time : Int, niveau : Int, Pistes : List<Piste>) : MutableList<Piste> {
+        val newList = mutableListOf<Piste>()
+        var lift = 1
+        var timeLeft = time
 
 
+        while(timeLeft > 0) {
+
+            var element  = Pistes.random()
+            while(element.start_lift != lift && element.difficulty > niveau) {
+                element = Pistes.random()
+            }
+            newList+= element
+            lift = element.end_lift.random()
+            timeLeft -= element.time[niveau]
+        }
+
+        return newList
     }
 
 
