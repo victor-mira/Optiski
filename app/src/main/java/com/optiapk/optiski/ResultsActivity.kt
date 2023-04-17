@@ -17,6 +17,7 @@ import android.os.Bundle
 import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -98,6 +99,7 @@ class ResultsActivity : AppCompatActivity() {
         )
         var position = sh.getInt("position", 0)
         val myEdit = sh.edit()
+
 
 
 
@@ -265,7 +267,7 @@ class ResultsActivity : AppCompatActivity() {
                 .setSmallIcon(R.drawable.baseline_downhill_skiing)
                 .setLargeIcon(BitmapFactory.decodeResource(this.resources, images[pisteSublist[position].difficulty - 1]))
                 .setContentTitle(pisteSublist[position].number)
-                .setContentText("Tuez moi")
+                .setContentText("Temps estimé pour faire cette piste : ${pisteSublist[position].time} min")
                 .setOnlyAlertOnce(true)
                 .setContentIntent(pendingIntentReturnApp)
                 .setAutoCancel(true)

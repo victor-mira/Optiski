@@ -105,26 +105,25 @@ class ChoicesActivity : AppCompatActivity() {
             )
             spinner.adapter = adapter
 
-            /*spinner.onItemSelectedListener = object :
+            spinner.onItemSelectedListener = object :
                 AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>,
                     view: View, position: Int, id: Long
                 ) {
-                    Toast.makeText(
+                    myEdit.putString("station", stations[position])
+                }
+
+                    /*Toast.makeText(
                         this@ChoicesActivity,
                         getString(R.string.selected_item) + " " +
                                 "" + stations[position], Toast.LENGTH_SHORT
-                    )
-                }
+                    )*/
 
-                override fun onNothingSelected(parent: AdapterView<*>) {
-                    Toast.makeText(
-                        this@ChoicesActivity,
-                        getString(R.string.choix_station), Toast.LENGTH_SHORT
-                    )
+               override fun onNothingSelected(parent: AdapterView<*>) {
+
                 }
-            }*/
+            }
         }
 
         buttonResult.setOnClickListener {
