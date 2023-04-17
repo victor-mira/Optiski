@@ -265,7 +265,7 @@ class ResultsActivity : AppCompatActivity() {
                 .setSmallIcon(R.drawable.baseline_downhill_skiing)
                 .setLargeIcon(BitmapFactory.decodeResource(this.resources, images[pisteSublist[position].difficulty - 1]))
                 .setContentTitle(pisteSublist[position].number)
-                .setContentText("Tuez moi")
+                .setContentText("Temps estimé pour la piste : ${pisteSublist[position]}")
                 .setOnlyAlertOnce(true)
                 .setContentIntent(pendingIntentReturnApp)
                 .setAutoCancel(true)
