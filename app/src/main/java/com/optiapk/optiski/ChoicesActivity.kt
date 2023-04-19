@@ -14,6 +14,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.IOException
@@ -22,6 +24,7 @@ import java.util.*
 class ChoicesActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var firestore: FirebaseFirestore
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +41,7 @@ class ChoicesActivity : AppCompatActivity() {
         // [END config_signin]
 
         auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
 
 
         val buttonResult = findViewById<ImageButton>(R.id.imageButton)
@@ -45,6 +49,9 @@ class ChoicesActivity : AppCompatActivity() {
         var stations = resources.getStringArray(R.array.Stations)
         val spinner = findViewById<Spinner>(R.id.choix_station)
         val buttonHelp = findViewById<ImageButton>(R.id.helpButton)
+        val imageLevel = findViewById<ImageView>(R.id.imageSkier)
+        val textName = findViewById<TextView>(R.id.textNomAccount)
+        val textLevel = findViewById<TextView>(R.id.textLevel)
 
         //Time picker
         val hourpicker = findViewById<NumberPicker>(R.id.hourpicker)
@@ -54,6 +61,31 @@ class ChoicesActivity : AppCompatActivity() {
         minutepicker.displayedValues = arrayOf("0","15","30","45")
         minutepicker.minValue = 0
         minutepicker.maxValue = 3
+
+        val user = auth.currentUser
+        val userRef = firestore.collection("users")
+
+        user?.let {
+            userRef.document(user.uid).get()
+                .addOnSuccessListener { documentSnapshot: DocumentSnapshot ->
+                    // Handle the successful retrieval of the document data
+                    val name = documentSnapshot.getString("userName")
+                    val level = documentSnapshot.getString("userLevel")
+                    textName.text = name
+                    textLevel.text = level
+                    if (level == "Débutant") {
+                        imageLevel.setImageResource(R.drawable.debutant)
+                    } else if (level == "Intermédiaire") {
+                        imageLevel.setImageResource(R.drawable.intermediaire)
+                    } else if (level == "Avancé") {
+                        imageLevel.setImageResource(R.drawable.avance)
+
+                    }
+                }
+                .addOnFailureListener { e: Exception ->
+                    // Handle the failure to retrieve the document data
+                }
+        }
 
         val builderAlert = AlertDialog.Builder(this)
         builderAlert.setTitle(R.string.position_alert_title)
@@ -140,6 +172,14 @@ class ChoicesActivity : AppCompatActivity() {
             auth.signOut()
             googleSignInClient.signOut().addOnCompleteListener(this,
                 OnCompleteListener<Void?> { updateUI(null) })
+        }
+
+
+
+
+        imageLevel.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
         }
     }
 

@@ -16,7 +16,7 @@
             android:name=".Feedback"
             android:exported="false" />
         <activity
-            android:name=".FeedbackActivity"
+            android:name=".ProfileActivity"
             android:exported="false" />
         <activity
             android:name=".ResultsActivity"
