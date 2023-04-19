@@ -1,17 +1,25 @@
 package com.optiapk.optiski
 
-import android.content.DialogInterface
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageManager
+import android.location.Criteria
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
-import android.util.Log
+import android.provider.Settings
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentSnapshot
@@ -19,13 +27,19 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.IOException
-import java.util.*
+
 
 class ChoicesActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+    private lateinit var fusedLocationProviderClient : FusedLocationProviderClient
     private lateinit var firestore: FirebaseFirestore
 
+
+    var context: Context? = null
+    var intent1: Intent? = null
+    var locationManager: LocationManager? = null
+    var gpsStatus = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,12 +57,29 @@ class ChoicesActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
 
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+
+
+
+        context = applicationContext
+
+        CheckGpsStatus()
+
 
         val buttonResult = findViewById<ImageButton>(R.id.imageButton)
         val signoutButton = findViewById<ImageButton>(R.id.signOutGoogleButton)
-        var stations = resources.getStringArray(R.array.Stations)
+        val stations = resources.getStringArray(R.array.Stations)
         val spinner = findViewById<Spinner>(R.id.choix_station)
         val buttonHelp = findViewById<ImageButton>(R.id.helpButton)
+        var spinCoord = DoubleArray(2)
+        var coords: DoubleArray? = fetchLocation()
+
+        if (coords!= null) {
+            println("coords non nulles")
+            spinCoord = coords
+        } else{
+            println("coords nulles")
+        }
         val imageLevel = findViewById<ImageView>(R.id.imageSkier)
         val textName = findViewById<TextView>(R.id.textNomAccount)
         val textLevel = findViewById<TextView>(R.id.textLevel)
@@ -61,7 +92,6 @@ class ChoicesActivity : AppCompatActivity() {
         minutepicker.displayedValues = arrayOf("0","15","30","45")
         minutepicker.minValue = 0
         minutepicker.maxValue = 3
-
         val user = auth.currentUser
         val userRef = firestore.collection("users")
 
@@ -87,16 +117,17 @@ class ChoicesActivity : AppCompatActivity() {
                 }
         }
 
-        val builderAlert = AlertDialog.Builder(this)
+        /*val builderAlert = AlertDialog.Builder(this)
         builderAlert.setTitle(R.string.position_alert_title)
         builderAlert.setMessage(R.string.position_alert_msg)
         builderAlert.setPositiveButton(R.string.ok) {dialog, which ->
+            //getLocation()
             Toast.makeText(applicationContext, R.string.position_accept, Toast.LENGTH_SHORT).show()
         }
         builderAlert.setNegativeButton(R.string.reject) {dialog, which ->
             Toast.makeText(applicationContext, R.string.position_denied, Toast.LENGTH_SHORT).show()
         }
-        builderAlert.show()
+        builderAlert.show()*/
 
         /**----Creation de la liste des pistes------**/
         var jsonString :String = ""
@@ -108,12 +139,16 @@ class ChoicesActivity : AppCompatActivity() {
         val gson = Gson()
         var listPisteType = object : TypeToken<List<Station>>() {}.type
 
-        val coords= doubleArrayOf(4.95,5.0)
+        //getLocation()
+
+
         val stations_json: List<Station> = gson.fromJson(jsonString, listPisteType)
+
         var title = ""
+
         stations_json.forEach{station ->
-            if (station.coords[0]>coords[0]-0.01 && station.coords[0]<coords[0]+0.01
-                && station.coords[1]>coords[1]-0.01 && station.coords[1]<coords[1]+0.01) {
+            if (station.coords[0]> spinCoord[0]-0.01 && station.coords[0]<spinCoord[0]+0.01
+                && station.coords[1]>spinCoord[1]-0.01 && station.coords[1]<spinCoord[1]+0.01) {
                 title = station.title
             }
         }
@@ -139,6 +174,8 @@ class ChoicesActivity : AppCompatActivity() {
                         getString(R.string.selected_item) + " " +
                                 "" + stations[position], Toast.LENGTH_SHORT
                     )
+
+                    println("Station : ${stations[position]}")
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
@@ -149,6 +186,8 @@ class ChoicesActivity : AppCompatActivity() {
                 }
             }
         }
+
+
 
         buttonResult.setOnClickListener {
             val intent = Intent(this, ResultsActivity::class.java)
@@ -175,13 +214,12 @@ class ChoicesActivity : AppCompatActivity() {
         }
 
 
-
-
         imageLevel.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
     }
+
 
 
     private fun updateUI(user: FirebaseUser?) {
@@ -195,5 +233,52 @@ class ChoicesActivity : AppCompatActivity() {
         }
 
 
+    }
+
+
+    fun CheckGpsStatus() {
+        locationManager = context!!.getSystemService(LOCATION_SERVICE) as LocationManager
+        assert(locationManager != null)
+        gpsStatus = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        if (!gpsStatus) {
+            val builderAlert = AlertDialog.Builder(this)
+            builderAlert.setTitle("GPS is Disabled")
+            builderAlert.setMessage(R.string.position_alert_msg)
+            builderAlert.setPositiveButton(R.string.ok) {dialog, which ->
+                intent1 = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent1)
+            }
+            builderAlert.setNegativeButton(R.string.reject) {dialog, which ->
+                Toast.makeText(applicationContext, R.string.position_denied, Toast.LENGTH_SHORT).show()
+            }
+            builderAlert.show()
+        }
+    }
+    fun fetchLocation(): DoubleArray? {
+        val latlon = DoubleArray(2)
+        // Get the location manager
+        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        val criteria = Criteria()
+        val bestProvider = locationManager.getBestProvider(criteria, false)
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 100)
+        }
+        val location = locationManager.getLastKnownLocation(bestProvider!!)
+        val lat: Double
+        val lon: Double
+        return try {
+            lat = location!!.latitude
+            lon = location.longitude
+            latlon[0] = lat
+            latlon[1] = lon
+            latlon
+        } catch (e: NullPointerException) {
+            e.printStackTrace()
+            null
+        }
     }
 }
