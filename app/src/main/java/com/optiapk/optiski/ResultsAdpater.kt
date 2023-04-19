@@ -10,8 +10,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.optiapk.optiski.models.Piste
+import com.optiapk.optiski.models.PisteFinal
 
-class ResultsAdpater(var trackList: List<Piste>) :
+class ResultsAdpater(var trackList: List<PisteFinal>) :
     RecyclerView.Adapter<ResultsAdpater.ViewHolder>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ResultsAdpater.ViewHolder {
         val view: View = LayoutInflater.from(parent.context)
@@ -30,6 +31,7 @@ class ResultsAdpater(var trackList: List<Piste>) :
         val bitmap = Bitmap.createBitmap(100, 20, Bitmap.Config.ARGB_8888)
         val canvas= Canvas(bitmap)
         when(track.difficulty) {
+            0 -> canvas.drawColor(Color.GRAY)
             1 -> canvas.drawColor(Color.GREEN)
             2-> canvas.drawColor(Color.BLUE)
             3-> canvas.drawColor(Color.BLACK)
