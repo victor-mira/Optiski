@@ -81,12 +81,7 @@ class ChoicesActivity : AppCompatActivity() {
         var spinCoord = DoubleArray(2)
         var coords: DoubleArray? = fetchLocation()
 
-        if (coords!= null) {
-            println("coords non nulles")
-            spinCoord = coords
-        } else{
-            println("coords nulles")
-        }
+
         val imageLevel = findViewById<ImageView>(R.id.imageSkier)
         val textName = findViewById<TextView>(R.id.textNomAccount)
         val textLevel = findViewById<TextView>(R.id.textLevel)
@@ -376,10 +371,11 @@ class ChoicesActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this,
                 arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 100)
         }
-        val location = locationManager.getLastKnownLocation(bestProvider!!)
-        val lat: Double
-        val lon: Double
+
         return try {
+            val location = locationManager.getLastKnownLocation(bestProvider!!)
+            val lat: Double
+            val lon: Double
             lat = location!!.latitude
             lon = location.longitude
             latlon[0] = lat
