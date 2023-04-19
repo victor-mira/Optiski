@@ -7,8 +7,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.core.content.ContextCompat.startActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -16,6 +22,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -45,9 +52,9 @@ class InscriptionActivity : AppCompatActivity() {
 
         val buttonNext = findViewById<Button>(R.id.nextButtonInscription)
         val buttonGoogleSignIn = findViewById<Button>(R.id.signInGoogleButtonAlternateInscription)
-        val editMail = findViewById<EditText>(R.id.enterEmailInscription)
-        val editPassword = findViewById<EditText>(R.id.enterPasswordInscription)
-        val editConfirmPassword = findViewById<EditText>(R.id.confirmPasswordInscription)
+        val editMail = findViewById<TextInputEditText>(R.id.real_text_mail)
+        val editPassword = findViewById<TextInputEditText>(R.id.real_text_password)
+        val editConfirmPassword = findViewById<TextInputEditText>(R.id.real_text_confirm)
         var buttonInscription:Button
         var editPersonName:EditText
         var level:TextView
@@ -66,8 +73,8 @@ class InscriptionActivity : AppCompatActivity() {
 
         buttonNext.setOnClickListener {
             // TODO verif information completes sinon toast
-            setContentView(R.layout.activity_inscription2)//
 
+            println("mdp : ${editPassword.text}, confirm : ${editConfirmPassword.text}")
             buttonInscription = findViewById<Button>(R.id.inscriptionButton)
             editPersonName = findViewById<EditText>(R.id.editPersonNameProfile)
 
@@ -75,37 +82,60 @@ class InscriptionActivity : AppCompatActivity() {
 
 
 
-            viewPager2 = findViewById(R.id.inscriptionViewPager)
-            val images = intArrayOf(
-                R.drawable.debutant,
-                R.drawable.intermediaire,
-                R.drawable.avance)
+            if (editPassword.text.toString() != editConfirmPassword.text.toString()
+                || editPassword.text.toString() == ""
+                || editMail.text.toString() == "") {
 
-            niveauxExplicationsArray = resources.getStringArray(R.array.niveaux_explications)
-            niveauxArray = resources.getStringArray(R.array.niveaux)
+                val builderAlert = AlertDialog.Builder(this)
+                builderAlert.setTitle("Erreur dans la saisie")
+                builderAlert.setMessage("Adresse Mail et/ou mot de passe non conforme (oubli ou non semblables")
+                builderAlert.setPositiveButton("Compris !") {dialog, which ->
+                }
 
-            viewPagerItemArrayList = ArrayList()
+                builderAlert.show()
 
-            for (i in images.indices) {
-                val viewPagerItem = ViewPagerItem(images[i], niveauxArray.get(i), niveauxExplicationsArray.get(i))
-                viewPagerItemArrayList!!.add(viewPagerItem)
-            }
-            val vpAdapter = VPAdapter(viewPagerItemArrayList!!)
+            } else {
+                setContentView(R.layout.activity_inscription2)//
 
-            viewPager2.setAdapter(vpAdapter)
+                buttonInscription = findViewById<Button>(R.id.inscriptionButton)
+                var editPersonName = findViewById<TextInputEditText>(R.id.editPersonName)
 
-            viewPager2.setClipToPadding(false)
+                viewPager2 = findViewById(R.id.inscriptionViewPager)
+                val images = intArrayOf(
+                    R.drawable.debutant,
+                    R.drawable.intermediaire,
+                    R.drawable.avance
+                )
 
-            viewPager2.setClipChildren(false)
+                niveauxExplicationsArray = resources.getStringArray(R.array.niveaux_explications)
+                niveauxArray = resources.getStringArray(R.array.niveaux)
 
-            viewPager2.setOffscreenPageLimit(2)
+                viewPagerItemArrayList = ArrayList()
 
-            viewPager2.getChildAt(0).overScrollMode = View.OVER_SCROLL_NEVER
+                for (i in images.indices) {
+                    val viewPagerItem = ViewPagerItem(
+                        images[i],
+                        niveauxArray.get(i),
+                        niveauxExplicationsArray.get(i)
+                    )
+                    viewPagerItemArrayList!!.add(viewPagerItem)
+                }
+                val vpAdapter = VPAdapter(viewPagerItemArrayList!!)
 
-            var tabLayout = findViewById<TabLayout>(R.id.tabLayout)
-            TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
-                //tab.text = niveauxArray[position].substringBefore(' ')
-            }.attach()
+                viewPager2.setAdapter(vpAdapter)
+
+                viewPager2.setClipToPadding(false)
+
+                viewPager2.setClipChildren(false)
+
+                viewPager2.setOffscreenPageLimit(2)
+
+                viewPager2.getChildAt(0).overScrollMode = View.OVER_SCROLL_NEVER
+
+                var tabLayout = findViewById<TabLayout>(R.id.tabLayout)
+                TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
+                    //tab.text = niveauxArray[position].substringBefore(' ')
+                }.attach()
 
 
 
@@ -115,6 +145,7 @@ class InscriptionActivity : AppCompatActivity() {
 
                 inscriptionWithPassword(editMail.text.toString(), editPassword.text.toString(), editPersonName.text.toString(), level)
 
+                }
             }
 
         }

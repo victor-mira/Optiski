@@ -12,6 +12,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
@@ -31,8 +32,8 @@ class ConnexionActivity : AppCompatActivity() {
 
         val buttonSignInGoogle = findViewById<Button>(R.id.signInGoogleButtonAlternateInscription)
         val buttonNext = findViewById<Button>(R.id.nextButtonInscription)
-        val email = findViewById<EditText>(R.id.enterEmailInscription)
-        val password = findViewById<EditText>(R.id.enterPasswordInscription)
+        val email = findViewById<TextInputEditText>(R.id.enterEmailConnexion)
+        val password = findViewById<EditText>(R.id.enterPasswordConnexion)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.web_client_id))

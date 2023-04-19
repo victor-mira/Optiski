@@ -5,7 +5,7 @@
     android:id="@+id/backgroundVid"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/background_main_activity"
     android:padding="16dp"
     tools:context=".MainActivity">
 
@@ -65,6 +65,7 @@
         android:ems="6"
         android:gravity="center"
         android:text="@string/connexion_google_text"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/text_connection"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signInGoogleButton" />
@@ -76,6 +77,7 @@
         android:text="@string/connexion_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@+id/signInButton" />
 
     <TextView
@@ -83,6 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/inscription_text"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/text_connection"
         app:layout_constraintTop_toBottomOf="@+id/signUpButton" />
