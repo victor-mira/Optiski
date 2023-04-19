@@ -186,17 +186,13 @@ class ChoicesActivity : AppCompatActivity() {
                                 "" + stations[position], Toast.LENGTH_SHORT
                     )*/
 
-               override fun onNothingSelected(parent: AdapterView<*>) {
+                override fun onNothingSelected(parent: AdapterView<*>) {
 
-                    println("Station : ${stations[position]}")
+//                    println("Station : ${stations[position]}")
                 }
 
-                }
             }
         }
-
-
-
         buttonResult.setOnClickListener {
             val timeLeft = hourpicker.value * 60 + minutepicker.value * 15
 

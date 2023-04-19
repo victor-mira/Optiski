@@ -2,48 +2,27 @@ package com.optiapk.optiski
 
 
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
-import android.app.Dialog
-import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.optiapk.optiski.models.PisteFinal
-
-
-import android.os.CountDownTimer
-import android.util.Log
-import android.view.View
-import android.view.ViewGroup
-import android.widget.*
-import androidx.appcompat.app.AlertDialog
-import androidx.core.view.get
-import androidx.viewpager2.widget.ViewPager2
-import com.bumptech.glide.Glide
-import com.optiapk.optiski.models.Piste
-import com.google.gson.reflect.TypeToken
 import java.io.IOException
 import java.util.*
 import kotlin.math.abs
@@ -119,12 +98,6 @@ class ResultsActivity : AppCompatActivity() {
         var position = sh.getInt("position", 0)
         val myEdit = sh.edit()
 
-
-
-
-
-
-
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         val images = IntArray(4)
@@ -132,7 +105,6 @@ class ResultsActivity : AppCompatActivity() {
         images[1] = R.drawable.debutant
         images[2] = R.drawable.intermediaire
         images[3] = R.drawable.avance
-
 
 
         val gson = Gson()
@@ -154,16 +126,13 @@ class ResultsActivity : AppCompatActivity() {
         }
 
 
-
-
-
         /**----Item in view----*/
         val buttonNext = findViewById<Button>(R.id.buttonTrackListNext)
         val buttonPrevious = findViewById<Button>(R.id.buttonTrackListPrevious)
 
         /**----Creation de la liste des pistes------**/
 
-        /*var jsonString :String = ""
+        var jsonString :String = ""
         try {
             jsonString = this.assets.open("pistes.json").bufferedReader().use { it.readText() }
         } catch (ioException: IOException) {
@@ -173,7 +142,7 @@ class ResultsActivity : AppCompatActivity() {
 
         val stations: List<Station> = gson.fromJson(jsonString, listPisteType)
         val pistes_shuffled = stations[0].pistes.shuffled()
-        val pistes_sublist = pistes_shuffled.subList(0, abs(Random.nextInt()%(stations[0].pistes.size-1)) +1)*/
+        val pistes_sublist = pistes_shuffled.subList(0, abs(Random.nextInt()%(stations[0].pistes.size-1)) +1)
 
 
         /**----Load miniMap of station----**/
@@ -201,7 +170,7 @@ class ResultsActivity : AppCompatActivity() {
         val validateButton = popup?.findViewById<Button>(R.id.validate_button)
         //Ajouter le spinner
         val spinner = popup?.findViewById<ProgressBar>(R.id.dialog_spinner)
-        var timer :CountDownTimer? = null
+        var timer: CountDownTimer? = null
         val timerTime = 10
         var timeRemaining: Double = timerTime.toDouble()
         val timerInterval = 0.1
@@ -210,18 +179,19 @@ class ResultsActivity : AppCompatActivity() {
         messageView?.setText(R.string.fin_tracks)
         // Lancement du compteur de temps
         spinner?.visibility = View.VISIBLE
-        timer = object : CountDownTimer((timeRemaining * 1000.0).toLong(), (timerInterval*1000.0).toLong()) {
+        timer = object :
+            CountDownTimer((timeRemaining * 1000.0).toLong(), (timerInterval * 1000.0).toLong()) {
             override fun onTick(millisUntilFinished: Long) {
-                timeRemaining-=timerInterval
+                timeRemaining -= timerInterval
                 // Mise à jour du texte affiché dans la popup
-                spinner?.progress = abs(((timeRemaining-timerTime.toDouble())*10).toInt())
+                spinner?.progress = abs(((timeRemaining - timerTime.toDouble()) * 10).toInt())
             }
 
             override fun onFinish() {
                 // Action à effectuer lorsque le temps est écoulé
                 // Fermeture de la popup
                 popup?.dismiss()
-                buttonNext.isEnabled=true
+                buttonNext.isEnabled = true
             }
         }
 
@@ -230,7 +200,7 @@ class ResultsActivity : AppCompatActivity() {
             // Action à effectuer lorsque l'utilisateur appuie sur le bouton Annuler
             popup?.dismiss()
             timer?.cancel()
-            buttonNext.isEnabled=true
+            buttonNext.isEnabled = true
         }
         validateButton?.setOnClickListener {
             val intent = Intent(this, Feedback::class.java)
@@ -240,13 +210,13 @@ class ResultsActivity : AppCompatActivity() {
         /**----Set Button Listener----**/
 
 
-        val buttonNext = findViewById<Button>(R.id.buttonTrackListNext)
-        val buttonPrevious = findViewById<Button>(R.id.buttonTrackListPrevious)
+//        val buttonNext = findViewById<Button>(R.id.buttonTrackListNext)
+//        val buttonPrevious = findViewById<Button>(R.id.buttonTrackListPrevious)
 
         if (viewPager2.currentItem == 0) {
             buttonPrevious.isEnabled = false
         }
-        if (viewPager2.currentItem == pisteSublist.size -1){
+        if (viewPager2.currentItem == pisteSublist.size - 1) {
             buttonNext.isEnabled = false
         }
 
@@ -260,37 +230,33 @@ class ResultsActivity : AppCompatActivity() {
                 myEdit.apply()
                 ShowNotification(position, images, pisteSublist)
 
-                if (viewPager2.currentItem == pisteSublist.size - 1) {
-                    buttonNext.isEnabled = false
-                }
-            }else {
+            } else {
                 // Affichage de la popup
-                buttonNext.isEnabled=false
+                buttonNext.isEnabled = false
                 timeRemaining = timerTime.toDouble()
                 timer.start()
                 popup?.show()
             }
+        }
 
-            buttonPrevious.setOnClickListener {
-                if (viewPager2.currentItem > 0) {
-                    viewPager2.currentItem--
-                    buttonNext.isEnabled = true
-                    position--
-                    myEdit.putInt("position", position)
-                    myEdit.apply()
-                    ShowNotification(position, images, pisteSublist)
-                }
-                if (viewPager2.currentItem == 0) {
-                buttonPrevious.isEnabled=false
-                }
+        buttonPrevious.setOnClickListener {
+            if (viewPager2.currentItem > 0) {
+                viewPager2.currentItem--
+                buttonNext.isEnabled = true
+                position--
+                myEdit.putInt("position", position)
+                myEdit.apply()
+                ShowNotification(position, images, pisteSublist)
             }
+            if (viewPager2.currentItem == 0) {
+                buttonPrevious.isEnabled = false
+            }
+        }
         ShowNotification(position, images, pisteSublist)
+
     }
 
-
-
-
-    /*----Affichage de la liste des pistes------*/
+        /*----Affichage de la liste des pistes------*/
         /*pistes_sublist.forEach{ piste ->
             val lineBorder = LinearLayout(this)
             val tv_piste = TextView(lineBorder.context)
@@ -316,55 +282,67 @@ class ResultsActivity : AppCompatActivity() {
 
 
 
-    fun FillList(Name : List<String>, Difficulty : List<String>, Time : List<String>) : MutableList<PisteFinal> {
-        val newList = mutableListOf<PisteFinal>()
-        for(i in Name.indices)
-            run {
-                newList += PisteFinal(Name[i], Difficulty[i].toInt(), Time[i].toInt())
-            }
+        fun FillList(
+            Name: List<String>,
+            Difficulty: List<String>,
+            Time: List<String>
+        ): MutableList<PisteFinal> {
+            val newList = mutableListOf<PisteFinal>()
+            for (i in Name.indices)
+                run {
+                    newList += PisteFinal(Name[i], Difficulty[i].toInt(), Time[i].toInt())
+                }
 
-        return newList
-    }
-
-    fun ShowNotification(position : Int, images : IntArray, pisteSublist : MutableList<PisteFinal>) {
-        val intentReturnApp = Intent(this, ResultsActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            return newList
         }
-        val pendingIntentReturnApp: PendingIntent =
-            PendingIntent.getActivity(this, 0, intentReturnApp, PendingIntent.FLAG_IMMUTABLE)
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notificationChannel = NotificationChannel(CHANNEL_ID, "Optiski" , NotificationManager.IMPORTANCE_HIGH)
-            notificationChannel.enableLights(true)
-            notificationChannel.lightColor = Color.GREEN
-            notificationChannel.enableVibration(false)
-            notificationManager.createNotificationChannel(notificationChannel)
-
-            var text : String
-
-            if(pisteSublist[position].difficulty == 0){
-                text = "C'est l'heure de la remontée !"
-            } else {
-                text = "Temps estimé pour faire cette piste : ${pisteSublist[position].time} min"
+        fun ShowNotification(
+            position: Int,
+            images: IntArray,
+            pisteSublist: MutableList<PisteFinal>
+        ) {
+            val intentReturnApp = Intent(this, ResultsActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
+            val pendingIntentReturnApp: PendingIntent =
+                PendingIntent.getActivity(this, 0, intentReturnApp, PendingIntent.FLAG_IMMUTABLE)
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                notificationChannel =
+                    NotificationChannel(CHANNEL_ID, "Optiski", NotificationManager.IMPORTANCE_HIGH)
+                notificationChannel.enableLights(true)
+                notificationChannel.lightColor = Color.GREEN
+                notificationChannel.enableVibration(false)
+                notificationManager.createNotificationChannel(notificationChannel)
+
+                var text: String
+
+                if (pisteSublist[position].difficulty == 0) {
+                    text = "C'est l'heure de la remontée !"
+                } else {
+                    text =
+                        "Temps estimé pour faire cette piste : ${pisteSublist[position].time} min"
+                }
 
 
-            builder = Notification.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.baseline_downhill_skiing)
-                .setLargeIcon(BitmapFactory.decodeResource(this.resources, images[pisteSublist[position].difficulty]))
-                .setContentTitle(pisteSublist[position].number)
-                .setContentText(text)
-                .setOnlyAlertOnce(true)
-                .setContentIntent(pendingIntentReturnApp)
-                .setAutoCancel(true)
-            //.addAction(R.drawable.clock, "Previous", pendingIntentPrevious)
+                builder = Notification.Builder(this, CHANNEL_ID)
+                    .setSmallIcon(R.drawable.baseline_downhill_skiing)
+                    .setLargeIcon(
+                        BitmapFactory.decodeResource(
+                            this.resources,
+                            images[pisteSublist[position].difficulty]
+                        )
+                    )
+                    .setContentTitle(pisteSublist[position].number)
+                    .setContentText(text)
+                    .setOnlyAlertOnce(true)
+                    .setContentIntent(pendingIntentReturnApp)
+                    .setAutoCancel(true)
+                //.addAction(R.drawable.clock, "Previous", pendingIntentPrevious)
+            }
+            notificationManager.notify(1234, builder.build())
+
         }
-        notificationManager.notify(1234, builder.build())
-
-    }
-
-
-
 
 }
 

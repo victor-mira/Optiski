@@ -498,6 +498,7 @@
       }]
   },
   {"title": "Le Valinouet",
+    "map": "https://valinouet.qc.ca/wp-content/uploads/2022/12/valinouet_mapdespistes_formatlettre.png",
     "coords": [48.323926,-70.838220],
     "pistes":[
       {
@@ -640,6 +641,7 @@
       }]
   },
   {"title": "Bromont",
+    "map": "https://montbelu.com/donnees/media/images/contenu/Carte.png",
     "coords": [48.436751,-71.228056],
     "pistes" :[
       {
