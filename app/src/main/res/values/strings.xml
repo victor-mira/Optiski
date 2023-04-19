@@ -37,6 +37,9 @@
     <string name="lauzes">Piste Les Lauzes (bleue)</string>
     <string name="marmottes">Piste Marmottes (rouge)</string>
     <string name="web_client_id">295480818850-10fd218ogp694hqv11nqm9ttlkjpn5ll.apps.googleusercontent.com</string>
+    <string name="cancel">Annuler</string>
+    <string name="validate">Valider</string>
+    <string name="fin_tracks">Vous avez fait toutes les pistes ? Validez pour terminer la session</string>
 
     <!-- Position alert -->
     <string name="position_alert_title">Localisation</string>
@@ -48,6 +51,8 @@
     <string name="fin_de_session">Félicitations ! Vous avez fini votre session de ski !</string>
     <string name="image_de_fin">Image de fin</string>
 
+    <string name="save">Sauvegarder</string>
+    <string name="profile">Profile</string>
     <string-array name="Stations">
         <item>La Rosière</item>
         <item>Les Arcs</item>
