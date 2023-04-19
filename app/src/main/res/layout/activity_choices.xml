@@ -46,6 +46,7 @@
         android:id="@+id/timelayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,6 +86,7 @@
             app:srcCompat="@drawable/question" />
     </LinearLayout>
 
+
     <TextView
         android:id="@+id/textNomAccount"
         android:layout_width="wrap_content"
@@ -93,18 +95,33 @@
         android:textColor="@color/dark_grey"
         app:layout_constraintBottom_toTopOf="@+id/imageSkier"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.398"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timelayout" />
+
+    <TextView
+        android:id="@+id/textLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="level"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.625"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timelayout" />
 
     <ImageView
         android:id="@+id/imageSkier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="193dp"
+        android:layout_height="185dp"
+        android:layout_marginTop="20dp"
         android:contentDescription="@string/skier_image"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/image_filler" />
+
+
 
     <ImageButton
         android:id="@+id/imageButton"
@@ -128,6 +145,7 @@
         android:backgroundTint="#00FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white"
         app:srcCompat="@drawable/logout" />
 
     <androidx.constraintlayout.widget.Guideline

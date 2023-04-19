@@ -1,6 +1,7 @@
 package com.optiapk.optiski
 
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat.startActivity
@@ -25,6 +27,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.firestore.FirebaseFirestore
+import com.optiapk.optiski.models.User
 
 
 class InscriptionActivity : AppCompatActivity() {
@@ -35,7 +39,7 @@ class InscriptionActivity : AppCompatActivity() {
     var viewPagerItemArrayList: ArrayList<ViewPagerItem>? = null
     private lateinit var niveauxExplicationsArray: Array<String>
     private lateinit var niveauxArray : Array<String>
-
+    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +48,7 @@ class InscriptionActivity : AppCompatActivity() {
 
 
         auth = FirebaseAuth.getInstance()
+        firestore = FirebaseFirestore.getInstance()
 
         val buttonNext = findViewById<Button>(R.id.nextButtonInscription)
         val buttonGoogleSignIn = findViewById<Button>(R.id.signInGoogleButtonAlternateInscription)
@@ -51,6 +56,8 @@ class InscriptionActivity : AppCompatActivity() {
         val editPassword = findViewById<TextInputEditText>(R.id.real_text_password)
         val editConfirmPassword = findViewById<TextInputEditText>(R.id.real_text_confirm)
         var buttonInscription:Button
+        var editPersonName:EditText
+        var level:TextView
 
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -61,15 +68,19 @@ class InscriptionActivity : AppCompatActivity() {
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         buttonGoogleSignIn.setOnClickListener {
-
-            val signInIntent = googleSignInClient.signInIntent
-            startActivityForResult(signInIntent, MainActivity.RC_SIGN_IN)
+            googleSignIn()
         }
 
         buttonNext.setOnClickListener {
             // TODO verif information completes sinon toast
 
             println("mdp : ${editPassword.text}, confirm : ${editConfirmPassword.text}")
+            buttonInscription = findViewById<Button>(R.id.inscriptionButton)
+            editPersonName = findViewById<EditText>(R.id.editPersonNameProfile)
+
+
+
+
 
             if (editPassword.text.toString() != editConfirmPassword.text.toString()
                 || editPassword.text.toString() == ""
@@ -127,13 +138,12 @@ class InscriptionActivity : AppCompatActivity() {
                 }.attach()
 
 
-                buttonInscription.setOnClickListener {
-                    // TODO Verif password normes et confirmpassword
-                    inscriptionWithPassword(
-                        editMail.text.toString(),
-                        editPassword.text.toString(),
-                        editPersonName.text.toString()
-                    )
+
+            buttonInscription.setOnClickListener {
+                // TODO Verif password normes et confirmpassword
+                var level = niveauxArray[viewPager2.currentItem]
+
+                inscriptionWithPassword(editMail.text.toString(), editPassword.text.toString(), editPersonName.text.toString(), level)
 
                 }
             }
@@ -151,7 +161,7 @@ class InscriptionActivity : AppCompatActivity() {
         }
     }
 
-    fun inscriptionWithPassword(email: String, password: String, name: String) {
+    fun inscriptionWithPassword(email: String, password: String, name: String, level:String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -166,6 +176,13 @@ class InscriptionActivity : AppCompatActivity() {
                             .build()
                         auth.currentUser?.updateProfile(profileUpdates)
                     }
+
+                    val userRef = firestore.collection("users")
+                    user?.let {
+                        val newUser = User(it, level)
+                        userRef.document(user.uid).set(newUser)
+                    }
+
                     val intent = Intent(this, ChoicesActivity::class.java)
                     startActivity(intent)
                 } else {
@@ -184,6 +201,7 @@ class InscriptionActivity : AppCompatActivity() {
         // Ui change
     }
 
+    @SuppressLint("MissingInflatedId")
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             // check if user already have a level or not
@@ -193,7 +211,44 @@ class InscriptionActivity : AppCompatActivity() {
             var editPersonName:EditText
 
             buttonInscription = findViewById<Button>(R.id.inscriptionButton)
-            editPersonName = findViewById<EditText>(R.id.editPersonName)
+            editPersonName = findViewById<EditText>(R.id.editPersonNameProfile)
+
+
+
+
+            viewPager2 = findViewById(R.id.inscriptionViewPager)
+            val images = intArrayOf(
+                R.drawable.debutant,
+                R.drawable.intermediaire,
+                R.drawable.avance)
+
+            niveauxExplicationsArray = resources.getStringArray(R.array.niveaux_explications)
+            niveauxArray = resources.getStringArray(R.array.niveaux)
+
+            viewPagerItemArrayList = ArrayList()
+
+            for (i in images.indices) {
+                val viewPagerItem = ViewPagerItem(images[i], niveauxArray.get(i), niveauxExplicationsArray.get(i))
+                viewPagerItemArrayList!!.add(viewPagerItem)
+            }
+            val vpAdapter = VPAdapter(viewPagerItemArrayList!!)
+
+            viewPager2.setAdapter(vpAdapter)
+
+            viewPager2.setClipToPadding(false)
+
+            viewPager2.setClipChildren(false)
+
+            viewPager2.setOffscreenPageLimit(2)
+
+            viewPager2.getChildAt(0).overScrollMode = View.OVER_SCROLL_NEVER
+
+            var tabLayout = findViewById<TabLayout>(R.id.tabLayout)
+            TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
+                //tab.text = niveauxArray[position].substringBefore(' ')
+            }.attach()
+
+
 
             if (auth.currentUser?.displayName != null) {
                 editPersonName.setText(auth.currentUser!!.displayName)
@@ -207,6 +262,14 @@ class InscriptionActivity : AppCompatActivity() {
                         .build()
                     auth.currentUser?.updateProfile(profileUpdates)
                 }
+
+                var levelValue = niveauxArray[viewPager2.currentItem]
+                val userRef = firestore.collection("users")
+                user?.let {
+                    userRef.document(user.uid).update("userLevel", levelValue)
+                    userRef.document(user.uid).update("userName", editPersonName.text.toString())
+                }
+
                 val intent = Intent(this, ChoicesActivity::class.java)
                 startActivity(intent)
             }
@@ -243,6 +306,13 @@ class InscriptionActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(MainActivity.TAG, "signInWithCredential:success")
                     val user = auth.currentUser
+
+                    val userRef = firestore.collection("users")
+                    user?.let {
+                        val newUser = User(it, "undefined")
+                        userRef.document(user.uid).set(newUser)
+                    }
+
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
