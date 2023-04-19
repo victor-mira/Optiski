@@ -10,12 +10,12 @@
     <string name="connexion_google_text">Connexion avec Google</string>
     <string name="connexion_text">connexion</string>
     <string name="inscription_text">Inscription</string>
-    <string name="adresse_mail">adresse Mail :</string>
+    <string name="adresse_mail">Adresse mail</string>
     <string name="mail_example">mail@example.com</string>
-    <string name="mot_de_passe">Mot de passe :</string>
-    <string name="confirmer_mot_de_passe">Confirmer le mot de passe :</string>
+    <string name="mot_de_passe">Mot de passe</string>
+    <string name="confirmer_mot_de_passe">Confirmer le mot de passe</string>
     <string name="password_example">********************</string>
-    <string name="ou">Ou</string>
+    <string name="ou">OU</string>
     <string name="next">next</string>
     <string name="inscription_button_text">inscription</string>
     <string name="image_filler">image filler</string>
