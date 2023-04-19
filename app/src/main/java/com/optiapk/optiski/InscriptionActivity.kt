@@ -69,7 +69,7 @@ class InscriptionActivity : AppCompatActivity() {
             setContentView(R.layout.activity_inscription2)//
 
             buttonInscription = findViewById<Button>(R.id.inscriptionButton)
-            editPersonName = findViewById<EditText>(R.id.editPersonName)
+            editPersonName = findViewById<EditText>(R.id.editPersonNameProfile)
 
 
 
@@ -180,7 +180,7 @@ class InscriptionActivity : AppCompatActivity() {
             var editPersonName:EditText
 
             buttonInscription = findViewById<Button>(R.id.inscriptionButton)
-            editPersonName = findViewById<EditText>(R.id.editPersonName)
+            editPersonName = findViewById<EditText>(R.id.editPersonNameProfile)
 
 
 
