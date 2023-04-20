@@ -75,8 +75,7 @@ class InscriptionActivity : AppCompatActivity() {
             // TODO verif information completes sinon toast
 
             println("mdp : ${editPassword.text}, confirm : ${editConfirmPassword.text}")
-            buttonInscription = findViewById<Button>(R.id.inscriptionButton)
-            editPersonName = findViewById<EditText>(R.id.editPersonNameProfile)
+            
 
 
 
@@ -98,7 +97,7 @@ class InscriptionActivity : AppCompatActivity() {
                 setContentView(R.layout.activity_inscription2)//
 
                 buttonInscription = findViewById<Button>(R.id.inscriptionButton)
-                var editPersonName = findViewById<TextInputEditText>(R.id.editPersonName)
+                var editPersonName = findViewById<TextInputEditText>(R.id.text_name)
 
                 viewPager2 = findViewById(R.id.inscriptionViewPager)
                 val images = intArrayOf(
@@ -141,10 +140,27 @@ class InscriptionActivity : AppCompatActivity() {
 
             buttonInscription.setOnClickListener {
                 // TODO Verif password normes et confirmpassword
-                var level = niveauxArray[viewPager2.currentItem]
 
-                inscriptionWithPassword(editMail.text.toString(), editPassword.text.toString(), editPersonName.text.toString(), level)
+                if (editPersonName.text.toString() == "") {
 
+                    val builderAlert = AlertDialog.Builder(this)
+                    builderAlert.setTitle("Erreur dans la saisie")
+                    builderAlert.setMessage("Vous n'avez pas entré votre nom")
+                    builderAlert.setPositiveButton("Compris !") {dialog, which ->
+                    }
+
+                    builderAlert.show()
+                } else {
+
+                    val level = niveauxArray[viewPager2.currentItem]
+
+                    inscriptionWithPassword(
+                        editMail.text.toString(),
+                        editPassword.text.toString(),
+                        editPersonName.text.toString(),
+                        level
+                    )
+                }
                 }
             }
 
