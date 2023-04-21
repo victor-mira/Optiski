@@ -75,7 +75,7 @@ class InscriptionActivity : AppCompatActivity() {
             // TODO verif information completes sinon toast
 
             println("mdp : ${editPassword.text}, confirm : ${editConfirmPassword.text}")
-            
+
 
 
 
@@ -97,7 +97,7 @@ class InscriptionActivity : AppCompatActivity() {
                 setContentView(R.layout.activity_inscription2)//
 
                 buttonInscription = findViewById<Button>(R.id.inscriptionButton)
-                var editPersonName = findViewById<TextInputEditText>(R.id.text_name)
+                val editPersonName = findViewById<TextInputEditText>(R.id.text_name)
 
                 viewPager2 = findViewById(R.id.inscriptionViewPager)
                 val images = intArrayOf(

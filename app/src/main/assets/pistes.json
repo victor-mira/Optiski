@@ -1,6 +1,7 @@
 [
   {"title": "La Rosière",
     "coords": [48.323926,-70.838220],
+    "map" : "https://montbelu.com/donnees/media/images/contenu/Carte(1).png",
     "pistes":[
       {
         "start_lift": 1,
@@ -249,7 +250,7 @@
       }]
   },
   {"title": "Courchevel",
-    "coords": [48.323926,-70.838220],
+    "coords": [48.423926,-71.078220],
     "pistes":[
       {
         "start_lift": 1,

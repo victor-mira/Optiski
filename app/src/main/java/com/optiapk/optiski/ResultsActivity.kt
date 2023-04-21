@@ -111,6 +111,7 @@ class ResultsActivity : AppCompatActivity() {
         val jsonName = sh.getString("number", null)
         val jsonDifficulty = sh.getString("difficulty", null)
         val jsonTime = sh.getString("time", null)
+        val mapStation = sh.getString("map", null)
         val type = object : TypeToken<ArrayList<String>>() {}.type//converting the json to list
         pisteSublistName = gson.fromJson(jsonName, type)//returning the list
         pisteSublistDifficulty = gson.fromJson(jsonDifficulty, type)
@@ -147,7 +148,7 @@ class ResultsActivity : AppCompatActivity() {
 
         /**----Load miniMap of station----**/
         Glide.with(this)
-            .load(stations[0].map)
+            .load(mapStation)
             .into(findViewById(R.id.miniPiste))
 
         /**----Results Adapter----**/

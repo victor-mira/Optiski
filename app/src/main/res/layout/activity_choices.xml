@@ -9,37 +9,26 @@
     android:padding="16dp"
     tools:context=".ChoicesActivity">
 
-    <TextView
-        android:id="@+id/optiski"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/optiski"
-        android:textColor="@color/dark_grey"
-        android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Spinner
         android:id="@+id/choix_station"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:backgroundTint="@color/dark_grey"
         android:contentDescription="@string/choix_station"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/optiski" />
+        app:layout_constraintTop_toBottomOf="@+id/textNomAccount" />
 
     <ImageView
         android:id="@+id/gps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
         android:contentDescription="@string/gps_pin"
         app:layout_constraintEnd_toStartOf="@+id/choix_station"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/optiski"
+        app:layout_constraintTop_toBottomOf="@+id/textNomAccount"
         app:srcCompat="@drawable/gps_pin" />
 
     <LinearLayout
@@ -93,19 +82,21 @@
         android:layout_height="wrap_content"
         android:text="@string/nom"
         android:textColor="@color/dark_grey"
-        app:layout_constraintBottom_toTopOf="@+id/imageSkier"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.398"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timelayout" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="level"
+        android:text="@string/level"
+        app:layout_constraintBottom_toTopOf="@+id/imageSkier"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.625"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:textColor="@color/dark_grey"
+        android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/timelayout" />
 
@@ -113,13 +104,13 @@
         android:id="@+id/imageSkier"
         android:layout_width="193dp"
         android:layout_height="185dp"
-        android:layout_marginTop="20dp"
         android:contentDescription="@string/skier_image"
         app:layout_constraintBottom_toTopOf="@+id/guideline8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/image_filler" />
+
 
 
 
@@ -146,7 +137,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:background="@color/white"
-        app:srcCompat="@drawable/logout" />
+        app:srcCompat="@drawable/question" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"

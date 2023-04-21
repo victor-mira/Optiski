@@ -12,6 +12,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.DocumentSnapshot
@@ -31,14 +32,15 @@ class ProfileActivity: AppCompatActivity() {
     override fun onCreate(SavedInstance: Bundle?) {
         super.onCreate(SavedInstance)
         setContentView(R.layout.activity_profile)
+        supportActionBar?.hide()
 
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
 
-        var exitButton = findViewById<ImageButton>(R.id.exitButton)
-        var logoutButton = findViewById<ImageButton>(R.id.logoutButton)
-        var saveButton = findViewById<Button>(R.id.saveProfileButton)
-        var editName = findViewById<EditText>(R.id.editPersonNameProfile)
+        val exitButton = findViewById<ImageButton>(R.id.exitButton)
+        val logoutButton = findViewById<ImageButton>(R.id.logoutButton)
+        val saveButton = findViewById<Button>(R.id.saveProfileButton)
+        val editName = findViewById<TextInputEditText>(R.id.text_name)
 
 
 
@@ -69,7 +71,7 @@ class ProfileActivity: AppCompatActivity() {
 
         viewPager2.getChildAt(0).overScrollMode = View.OVER_SCROLL_NEVER
 
-        var tabLayout = findViewById<TabLayout>(R.id.tabLayoutProfile)
+        val tabLayout = findViewById<TabLayout>(R.id.tabLayoutProfile)
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             //tab.text = niveauxArray[position].substringBefore(' ')
         }.attach()
@@ -120,13 +122,13 @@ class ProfileActivity: AppCompatActivity() {
 //                    updateUI(user)
             if (auth.currentUser?.displayName != editName.text.toString()) {
 
-                var profileUpdates = UserProfileChangeRequest.Builder()
+                val profileUpdates = UserProfileChangeRequest.Builder()
                     .setDisplayName(editName.text.toString())
                     .build()
                 auth.currentUser?.updateProfile(profileUpdates)
             }
 
-            var levelValue = niveauxArray[viewPager2.currentItem]
+            val levelValue = niveauxArray[viewPager2.currentItem]
             user?.let {
                 userRef.document(user.uid).update("userLevel", levelValue)
                 userRef.document(user.uid).update("userName", editName.text.toString())
