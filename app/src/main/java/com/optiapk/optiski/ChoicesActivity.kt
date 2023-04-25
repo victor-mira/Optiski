@@ -92,6 +92,7 @@ class ChoicesActivity : AppCompatActivity() {
         val minutepicker = findViewById<NumberPicker>(R.id.minutepicker)
         hourpicker.minValue = 0
         hourpicker.maxValue = 4
+        hourpicker.value = 1
         minutepicker.displayedValues = arrayOf("0","15","30","45")
         minutepicker.minValue = 0
         minutepicker.maxValue = 3
