@@ -78,8 +78,9 @@ class ChoicesActivity : AppCompatActivity() {
         val stations = resources.getStringArray(R.array.Stations)
         val spinner = findViewById<Spinner>(R.id.choix_station)
         val buttonHelp = findViewById<ImageButton>(R.id.helpButton)
-        var spinCoord = DoubleArray(2)
         var coords: DoubleArray? = fetchLocation()
+
+        println("${coords?.get(0)}, ${coords?.get(1)}")
 
 
         val imageLevel = findViewById<ImageView>(R.id.imageSkier)
@@ -132,7 +133,7 @@ class ChoicesActivity : AppCompatActivity() {
         builderAlert.show()*/
 
         /**----Creation de la liste des pistes------**/
-        /*var jsonString :String = ""
+        var jsonString :String = ""
         try {
             jsonString = this.assets.open("pistes.json").bufferedReader().use { it.readText() }
         } catch (ioException: IOException) {
@@ -148,15 +149,20 @@ class ChoicesActivity : AppCompatActivity() {
 
         var title = ""
 
-        stations_json.forEach{station ->
-            if (station.coords[0]> spinCoord[0]-0.01 && station.coords[0]<spinCoord[0]+0.01
-                && station.coords[1]>spinCoord[1]-0.01 && station.coords[1]<spinCoord[1]+0.01) {
-                title = station.title
+        if (coords != null) {
+
+            stations_json.forEach { station ->
+                if ((station.coords[0] > (coords[0] - 0.01)) && (station.coords[0] < (coords[0] + 0.01))
+                    && (station.coords[1] > (coords[1] - 0.01)) && (station.coords[1] < (coords[1] + 0.01))
+                ) {
+                    title = station.title
+                }
             }
+
+            if (title != "")
+                stations[0] = stations[stations.indexOf(title)]
+                    .also { stations[stations.indexOf(title)] = stations[0] }
         }
-        if(!title.equals(""))
-            stations[0]=stations[stations.indexOf(title)]
-                .also{stations[stations.indexOf(title)]=stations[0]}*/
 
         if (spinner != null) {
             val adapter = ArrayAdapter(
@@ -203,7 +209,14 @@ class ChoicesActivity : AppCompatActivity() {
             } else {
                 val intent = Intent(this, ResultsActivity::class.java)
                 val pos = 0
-                val niveau = 1
+                val niveau : Int
+                if (textLevel.text == "Débutant") {
+                    niveau = 0
+                } else if (textLevel.text == "Intermédiaire") {
+                    niveau = 1
+                } else {
+                    niveau = 2
+                }
                 val stationChoisie = sharedPref.getString("station", null)
                 val index = stations.indexOf(stationChoisie)
 
@@ -221,6 +234,7 @@ class ChoicesActivity : AppCompatActivity() {
 
 
                 val stations: List<Station> = gson.fromJson(jsonString, listPisteType)
+                myEdit.putString("map", stations[index].map)
                 val pisteShuffled = stations[index].pistes
                 val lifts = stations[index].lifts
 
@@ -258,6 +272,7 @@ class ChoicesActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+
         buttonHelp.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             builder.setMessage("Veuillez entrer une durée entre 30 minutes 4h45, par tranche de 15 minutes (Par exemple, 0:45 ou 2h15)")
@@ -272,10 +287,22 @@ class ChoicesActivity : AppCompatActivity() {
         }
 
         signoutButton.setOnClickListener{
-            auth = FirebaseAuth.getInstance()
+
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("Si vous voulez modifier votre profile, alors cliquez sur l'image représentant votre niveau")
+            builder.setTitle("Aide profil")
+            builder.setCancelable(true)
+            builder.setPositiveButton("Compris!") {
+                    dialog, which -> dialog.cancel()
+            }
+
+            val alertDialog = builder.create()
+            alertDialog.show()
+
+            /*auth = FirebaseAuth.getInstance()
             auth.signOut()
             googleSignInClient.signOut().addOnCompleteListener(this,
-                OnCompleteListener<Void?> { updateUI(null) })
+                OnCompleteListener<Void?> { updateUI(null) })*/
         }
 
 
@@ -283,6 +310,76 @@ class ChoicesActivity : AppCompatActivity() {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val coords : DoubleArray? = fetchLocation()
+        val stations = resources.getStringArray(R.array.Stations)
+        val spinner = findViewById<Spinner>(R.id.choix_station)
+
+        var jsonString :String = ""
+        try {
+            jsonString = this.assets.open("pistes.json").bufferedReader().use { it.readText() }
+        } catch (ioException: IOException) {
+            ioException.printStackTrace()
+        }
+        val gson = Gson()
+        val listPisteType = object : TypeToken<List<Station>>() {}.type
+
+        //getLocation()
+
+
+        val stations_json: List<Station> = gson.fromJson(jsonString, listPisteType)
+
+        var title = ""
+
+        if (coords != null) {
+
+            stations_json.forEach { station ->
+                if ((station.coords[0] > (coords[0] - 0.01)) && (station.coords[0] < (coords[0] + 0.01))
+                    && (station.coords[1] > (coords[1] - 0.01)) && (station.coords[1] < (coords[1] + 0.01))
+                ) {
+                    title = station.title
+                }
+            }
+
+            if (title != "")
+                stations[0] = stations[stations.indexOf(title)]
+                    .also { stations[stations.indexOf(title)] = stations[0] }
+        }
+
+        if (spinner != null) {
+            val adapter = ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item, stations
+            )
+            spinner.adapter = adapter
+
+            spinner.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View, position: Int, id: Long
+                ) {
+                    //myEdit.putString("station", stations[position])
+                    //myEdit.apply()
+                }
+
+                /*Toast.makeText(
+                    this@ChoicesActivity,
+                    getString(R.string.selected_item) + " " +
+                            "" + stations[position], Toast.LENGTH_SHORT
+                )*/
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+
+//                    println("Station : ${stations[position]}")
+                }
+
+            }
+        }
+
     }
 
     private fun fillList(niveau: Int, Pistes: List<Piste>): MutableList<Piste> {
