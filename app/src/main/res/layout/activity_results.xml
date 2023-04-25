@@ -6,40 +6,52 @@
     android:layout_height="match_parent"
     android:paddingTop="16dp">
 
-    <ImageView
-        android:id="@+id/miniPiste"
-        android:layout_width="match_parent"
-        android:layout_height="251dp"
-        android:contentDescription="@string/plan_pistes"
+    <HorizontalScrollView
+        android:id="@+id/minipistescrollview"
+        android:layout_width="411dp"
+        android:layout_height="667dp"
+        android:scrollbars="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/minipiste" />
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageView
+            android:id="@+id/miniPiste"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/plan_pistes"
+            app:srcCompat="@drawable/minipiste" />
+    </HorizontalScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="55sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <Button
+        <ImageView
             android:id="@+id/buttonTrackListPrevious"
-            android:layout_width="wrap_content"
+            android:layout_width="100sp"
             android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/previous"/>
 
-        <Button
+        <ImageView
             android:id="@+id/buttonTrackListNext"
-            android:layout_width="wrap_content"
+            android:layout_width="100sp"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/next"/>
 
         <LinearLayout
-            android:layout_width="100dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/buttonTrackListNext"

@@ -7,15 +7,18 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-import android.view.View
+import android.util.Log
+import android.view.*
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.get
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
@@ -27,7 +30,6 @@ import java.io.IOException
 import java.util.*
 import kotlin.math.abs
 import kotlin.random.Random
-
 class ResultsActivity : AppCompatActivity() {
 
     private val CHANNEL_ID = "channel1"
@@ -128,8 +130,8 @@ class ResultsActivity : AppCompatActivity() {
 
 
         /**----Item in view----*/
-        val buttonNext = findViewById<Button>(R.id.buttonTrackListNext)
-        val buttonPrevious = findViewById<Button>(R.id.buttonTrackListPrevious)
+        val buttonNext = findViewById<ImageView>(R.id.buttonTrackListNext)
+        val buttonPrevious = findViewById<ImageView>(R.id.buttonTrackListPrevious)
 
         /**----Creation de la liste des pistes------**/
 
@@ -141,15 +143,14 @@ class ResultsActivity : AppCompatActivity() {
         }
         var listPisteType = object : TypeToken<List<Station>>() {}.type
 
-        val stations: List<Station> = gson.fromJson(jsonString, listPisteType)
-        val pistes_shuffled = stations[0].pistes.shuffled()
-        val pistes_sublist = pistes_shuffled.subList(0, abs(Random.nextInt()%(stations[0].pistes.size-1)) +1)
-
-
         /**----Load miniMap of station----**/
+//        val scrollViewHeight = findViewById<HorizontalScrollView>(R.id.minipistescrollview).height
+//        val layoutParamsImage = FrameLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, scrollViewHeight)
         Glide.with(this)
             .load(mapStation)
+            .override(com.bumptech.glide.request.target.Target.SIZE_ORIGINAL)
             .into(findViewById(R.id.miniPiste))
+//        findViewById<ImageView>(R.id.miniPiste).layoutParams = layoutParamsImage
 
         /**----Results Adapter----**/
         val resultsAdapter = ResultsAdpater(pisteSublist)
@@ -200,12 +201,15 @@ class ResultsActivity : AppCompatActivity() {
         cancelButton?.setOnClickListener {
             // Action à effectuer lorsque l'utilisateur appuie sur le bouton Annuler
             popup?.dismiss()
-            timer?.cancel()
-            buttonNext.isEnabled = true
         }
         validateButton?.setOnClickListener {
             val intent = Intent(this, Feedback::class.java)
             startActivity(intent)
+        }
+        popup?.setOnDismissListener {
+            popup?.dismiss()
+            timer?.cancel()
+            buttonNext.isEnabled = true
         }
 
         /**----Set Button Listener----**/
@@ -214,26 +218,20 @@ class ResultsActivity : AppCompatActivity() {
 //        val buttonNext = findViewById<Button>(R.id.buttonTrackListNext)
 //        val buttonPrevious = findViewById<Button>(R.id.buttonTrackListPrevious)
 
-        if (viewPager2.currentItem == 0) {
-            buttonPrevious.isEnabled = false
-        }
-        if (viewPager2.currentItem == pisteSublist.size - 1) {
-            buttonNext.isEnabled = false
-        }
-
-
         buttonNext.setOnClickListener {
             if (viewPager2.currentItem < pisteSublist.size - 1) {
                 viewPager2.currentItem++
-                buttonPrevious.isEnabled = true
                 position++
                 myEdit.putInt("position", position)
                 myEdit.apply()
                 ShowNotification(position, images, pisteSublist)
-
+                if (viewPager2.currentItem > 0)
+                    buttonPrevious.setColorFilter(R.color.black)
+                if (viewPager2.currentItem == pisteSublist.size - 1)
+                    buttonNext.setImageResource(R.drawable.end)
             } else {
                 // Affichage de la popup
-                buttonNext.isEnabled = false
+                buttonNext.setColorFilter(R.color.light_grey)
                 timeRemaining = timerTime.toDouble()
                 timer.start()
                 popup?.show()
@@ -243,14 +241,15 @@ class ResultsActivity : AppCompatActivity() {
         buttonPrevious.setOnClickListener {
             if (viewPager2.currentItem > 0) {
                 viewPager2.currentItem--
-                buttonNext.isEnabled = true
                 position--
                 myEdit.putInt("position", position)
                 myEdit.apply()
                 ShowNotification(position, images, pisteSublist)
+                if (viewPager2.currentItem == pisteSublist.size - 2)
+                    buttonNext.setImageResource(R.drawable.next)
             }
             if (viewPager2.currentItem == 0) {
-                buttonPrevious.isEnabled = false
+                buttonPrevious.setColorFilter(R.color.light_grey)
             }
         }
         ShowNotification(position, images, pisteSublist)
@@ -277,11 +276,6 @@ class ResultsActivity : AppCompatActivity() {
             findViewById<LinearLayout>(R.id.scrollLayoutResult).addView(lineBorder)
             Log.i("data", piste.number)
         }*/
-
-
-
-
-
 
         fun FillList(
             Name: List<String>,
@@ -346,6 +340,7 @@ class ResultsActivity : AppCompatActivity() {
         }
 
 }
+
 
 
 
