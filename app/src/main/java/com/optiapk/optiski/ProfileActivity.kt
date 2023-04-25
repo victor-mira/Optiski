@@ -8,7 +8,9 @@ import android.widget.EditText
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -36,6 +38,13 @@ class ProfileActivity: AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         firestore = FirebaseFirestore.getInstance()
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.web_client_id))
+            .requestEmail()
+            .build()
+
+        googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         val exitButton = findViewById<ImageButton>(R.id.exitButton)
         val logoutButton = findViewById<ImageButton>(R.id.logoutButton)
@@ -109,6 +118,7 @@ class ProfileActivity: AppCompatActivity() {
 
         logoutButton.setOnClickListener{
             auth.signOut()
+
             googleSignInClient.signOut().addOnCompleteListener(this,
                 OnCompleteListener<Void?> {
                     val intent = Intent(this, MainActivity::class.java)
